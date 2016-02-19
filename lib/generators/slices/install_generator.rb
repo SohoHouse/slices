@@ -64,8 +64,8 @@ module Slices
       say ""
       say "Next, run 'rake slices:seed' to create your Slices admin user and home page."
       say "Then you can run 'rails server' and visit http://localhost:3000/admin to begin using Slices."
-      say "The next step is to create some slices. You can find the guides in the wiki:"
-      say "https://github.com/withassociates/slices/wiki"
+      say "The next step is to create some slices. You can find the guides in the Slices repo:"
+      say "https://github.com/withassociates/slices/tree/master/guides"
       say ""
     end
   end

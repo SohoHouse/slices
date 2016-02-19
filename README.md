@@ -97,6 +97,9 @@ An example of a complicated Slice:
 $ rails generate slice carousel title:string gallery:attachments link:page
 ```
 
+## Documentation
+See the [guides](https://github.com/withassociates/slices/tree/master/guides) directory for common tasks and patterns when using Slices.
+
 ## License
 
 Slices is released under the [MIT license](http://www.opensource.org/licenses/MIT).
