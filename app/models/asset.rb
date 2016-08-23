@@ -176,13 +176,13 @@ class Asset
   private
 
   def rename_file
-    return if @new_name.blank?
+    return if @renamed
 
-    new_file_name = sanitize(@new_name)
+    new_file_name = sanitize(name)
     Slices::Asset::Rename.run(file, new_file_name)
     file.instance_write(:file_name, new_file_name)
     set_keywords
-    @new_name = nil
+    @renamed = true
   end
 
   def sanitize(filename)
