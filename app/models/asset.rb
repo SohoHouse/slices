@@ -184,12 +184,7 @@ class Asset
   end
 
   def sanitize(filename)
-    file.send(:cleanup_filename, filename).tap do |name|
-      if self.file && self.file.original_filename
-        extension = normalized_extension
-        name << extension unless name.ends_with?(extension)
-      end
-    end
+    SecureRandom.hex
   end
 
   def normalized_extension
