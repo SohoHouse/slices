@@ -186,7 +186,9 @@ class Asset
   end
 
   def sanitize(filename)
-    SecureRandom.hex
+    name = SecureRandom.hex
+    name << normalized_extension if self.file && self.file.original_filename
+    name
   end
 
   def normalized_extension
