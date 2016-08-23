@@ -188,7 +188,7 @@ class Asset
   def sanitize(filename)
     file.send(:cleanup_filename, filename).tap do |name|
       name.slice!(100..-1)
-      name << SecureRandom.hex(1)
+      name << SecureRandom.hex(2)
       name << normalized_extension if file && file.original_filename
     end
   end
