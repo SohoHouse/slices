@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe PagesHelper, type: :helper do
-
   describe "#google_analytics_tracking_code" do
-
     context "when tracking" do
       before do
         allow(helper).to receive_messages(add_tracking_code?: true)
@@ -49,7 +47,6 @@ describe PagesHelper, type: :helper do
     end
 
     context "when not tracking" do
-
       before do
         expect(helper).to receive(:add_tracking_code?).and_return(false)
       end
@@ -67,12 +64,10 @@ describe PagesHelper, type: :helper do
           is_expected.to be_nil
         end
       end
-
     end
   end
 
   describe "#add_tracking_code?" do
-
     subject do
       helper.add_tracking_code?
     end
@@ -99,7 +94,6 @@ describe PagesHelper, type: :helper do
       end
 
       context "signed in" do
-
         before do
           expect(helper).to receive(:admin_signed_in?).and_return(true)
         end
@@ -108,8 +102,6 @@ describe PagesHelper, type: :helper do
           is_expected.to be_falsey
         end
       end
-
     end
   end
 end
-

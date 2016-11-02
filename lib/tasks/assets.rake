@@ -20,7 +20,6 @@ end
 
 namespace :slices do
   namespace :assets do
-
     desc "Mark assets for reprocessing"
     task reprocess: :environment do
       Asset.update_all(file_dimensions: {})
@@ -32,4 +31,3 @@ namespace :slices do
     end
   end
 end
-

@@ -5,4 +5,3 @@ module ErrorHandlingMacros
     end
   end
 end
-

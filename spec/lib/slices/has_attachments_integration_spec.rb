@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Asset Reference" do
-
   context "when an asset slice is added to /parent" do
     let! :asset do
       Asset.make file: file_fixture
@@ -14,7 +13,7 @@ describe "Asset Reference" do
     let :slide do
       {
         asset_id: asset.id,
-        caption: 'Hello World'
+        caption: 'Hello World',
       }
     end
 
@@ -24,7 +23,7 @@ describe "Asset Reference" do
     end
 
     it "stores the page url in the asset page_cache" do
-      expect(asset.reload.page_cache.first).to include ({'path' => '/parent'})
+      expect(asset.reload.page_cache.first).to include ({ 'path' => '/parent' })
     end
 
     it "stores the page id in the pages ids" do
@@ -47,7 +46,7 @@ describe "Asset Reference" do
     let :slide do
       {
         asset_id: asset.id,
-        caption: 'Hello World'
+        caption: 'Hello World',
       }
     end
 
@@ -57,7 +56,7 @@ describe "Asset Reference" do
 
     context "adding" do
       it "(asset) adds the page url to the asset page_cache" do
-        expect(loaded_asset.page_cache.first).to include ({'path' => '/parent'})
+        expect(loaded_asset.page_cache.first).to include ({ 'path' => '/parent' })
       end
 
       it "(asset) has reference of page" do
@@ -71,7 +70,6 @@ describe "Asset Reference" do
       it "(page) has referenced attachments" do
         expect(parent.reload.attachment_asset_ids).to eq [asset.id]
       end
-
     end
 
     context "removed" do
@@ -113,7 +111,7 @@ describe "Asset Reference" do
     let :slide do
       {
         asset_id: asset.id,
-        caption: 'Hello World'
+        caption: 'Hello World',
       }
     end
 
@@ -123,7 +121,7 @@ describe "Asset Reference" do
     end
 
     it "adds the page url to the asset page_cache" do
-      expect(asset.reload.page_cache.first).to include ({'path' => '/parent'})
+      expect(asset.reload.page_cache.first).to include ({ 'path' => '/parent' })
     end
   end
 
@@ -142,7 +140,7 @@ describe "Asset Reference" do
     let :slide do
       {
         asset_id: asset.id,
-        caption: 'Hello World'
+        caption: 'Hello World',
       }
     end
 
@@ -151,7 +149,7 @@ describe "Asset Reference" do
     end
 
     it "updates the page url from the asset page_cache" do
-      expect(asset.reload.page_cache.first).to include ({'path' => '/new-parent'})
+      expect(asset.reload.page_cache.first).to include ({ 'path' => '/new-parent' })
     end
 
     it "changes the path" do

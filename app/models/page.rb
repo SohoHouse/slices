@@ -13,7 +13,7 @@ class Page
   LAST_CHANGED_AT_CACHE_KEY = 'page-last-changed'
 
   field :name, localize: Slices::Config.i18n?
-  field :role  # only relevant for virtual pages
+  field :role # only relevant for virtual pages
   field :active, type: Boolean, default: false
   field :layout, type: String, default: 'default'
   field :meta_description, localize: Slices::Config.i18n?, default: ''
@@ -26,8 +26,8 @@ class Page
 
   basic_text_search_in :introduction, :extended, :name
 
-  scope :entries, ->{ all }
-  scope :virtual, ->{ where(:role.ne => nil).asc(:name) }
+  scope :entries, -> { all }
+  scope :virtual, -> { where(:role.ne => nil).asc(:name) }
 
   validates_presence_of :name
 
@@ -40,14 +40,12 @@ class Page
 
   CACHED_VIRTUAL_PAGES = {
     'not_found' => '404',
-    'error' => '500'
+    'error' => '500',
   }
 
   def self.role_for_status(status)
     if CACHED_VIRTUAL_PAGES.has_value?(status)
-      CACHED_VIRTUAL_PAGES.detect { |k, v| v == status }[0]
-    else
-      nil
+      CACHED_VIRTUAL_PAGES.detect { |_k, v| v == status }[0]
     end
   end
 
@@ -78,14 +76,14 @@ class Page
   end
 
   def self.find_by_id(id)
-    ActiveSupport::Deprecation::warn 'Page.find_by_id is depreciated, please use Page.find instead.'
+    ActiveSupport::Deprecation.warn 'Page.find_by_id is depreciated, please use Page.find instead.'
     find(id)
   rescue Mongoid::Errors::DocumentNotFound
     nil
   end
 
   def self.find_by_id!(id)
-    ActiveSupport::Deprecation::warn 'Page.find_by_id is depreciated, please use Page.find instead.'
+    ActiveSupport::Deprecation.warn 'Page.find_by_id is depreciated, please use Page.find instead.'
     find_by_id(id) || (raise NotFound)
   end
 
@@ -106,7 +104,7 @@ class Page
   end
 
   def cache_virtual_page
-    if cacheable_virtual_page? && (! Rails.env.test?)
+    if cacheable_virtual_page? && (!Rails.env.test?)
       fork do
         script = File.join(Slices.gem_path, 'script', 'request-local-page')
         rails = File.join(Rails.root, 'script', 'rails')
@@ -126,16 +124,16 @@ class Page
   end
 
   def set_page?
-    kind_of?(SetPage)
+    is_a?(SetPage)
   end
 
   def sets
-    slices.select { |slice| slice.kind_of?(SetSlice) }
+    slices.select { |slice| slice.is_a?(SetSlice) }
   end
 
   def set_slice(kind)
-    slice_class = Object.const_get("#{kind.to_s}SetSlice".camelize)
-    slices.detect { |slice| slice.kind_of?(slice_class) }
+    slice_class = Object.const_get("#{kind}SetSlice".camelize)
+    slices.detect { |slice| slice.is_a?(slice_class) }
   end
 
   def template
@@ -161,7 +159,6 @@ class Page
     end
   end
 
-
   # Added in merge or page & content
   def set_keywords
     super
@@ -178,12 +175,12 @@ class Page
   # End of added
 
   def description
-    ActiveSupport::Deprecation::warn DESCRIPTION_DEPRECATION_WARNING
+    ActiveSupport::Deprecation.warn DESCRIPTION_DEPRECATION_WARNING
     meta_description
   end
 
   def description=(value)
-    ActiveSupport::Deprecation::warn DESCRIPTION_DEPRECATION_WARNING
+    ActiveSupport::Deprecation.warn DESCRIPTION_DEPRECATION_WARNING
     self.meta_description = value
   end
 
@@ -206,13 +203,13 @@ class Page
   private_class_method :page_exists?
 
   private
+
     def update_has_content
       self.has_content = slices.any?
       true # must be true otherwise save will fail
     end
 
     def destroy_children
-      children.each { |child| child.destroy }
+      children.each(&:destroy)
     end
-
 end

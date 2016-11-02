@@ -40,7 +40,7 @@ module Slices
     def setup_options
       {
         renderer:     self,
-        current_page: @current_page
+        current_page: @current_page,
       }
     end
 
@@ -49,4 +49,3 @@ module Slices
     end
   end
 end
-

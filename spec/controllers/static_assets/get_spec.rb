@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe StaticAssetsController, type: :controller do
-
   context "GET :templates" do
     it "serve shared templates" do
       get :templates, name: 'page_meta', format: 'hbs'
@@ -15,5 +14,4 @@ describe StaticAssetsController, type: :controller do
       expect(response).to be_success
     end
   end
-
 end

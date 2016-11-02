@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Deleting assets from the Library", type: :request, js: true do
-
   describe "a single asset" do
     before do
       create_asset_fixtures
@@ -50,6 +49,4 @@ describe "Deleting assets from the Library", type: :request, js: true do
       expect(page).to have_no_css ".asset-library-item"
     end
   end
-
 end
-

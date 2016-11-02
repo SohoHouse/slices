@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'bundler'
 Bundler.setup
 
-require File.expand_path('../dummy/config/environment.rb',  __FILE__)
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 
@@ -37,12 +37,16 @@ RSpec.configure do |config|
   # Added for Rspec 3.0
   config.infer_spec_type_from_file_location!
   config.expose_current_running_example_as :example
-  config.example_status_persistence_file_path= 'tmp/example_status_persistence.txt'
+  config.example_status_persistence_file_path = 'tmp/example_status_persistence.txt'
 
   # Hook in database cleaner
-  config.before do
+  config.before :suite do
     DatabaseCleaner.orm = 'mongoid'
     DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean
+  end
+
+  config.before do
     DatabaseCleaner.start
     Asset.attachment_definitions[:file][:url] =
       '/system/spec/:attachment/:mon_year/:id/:style/:filename'
@@ -52,12 +56,10 @@ RSpec.configure do |config|
     # Delete uploaded assets
     case Paperclip::Attachment.default_options[:storage].to_sym
     when :filesystem
-      FileUtils.rm_rf Rails::root.join *%w[public system spec]
+      FileUtils.rm_rf Rails.root.join *%w[public system spec]
     when :fog
       Asset.all.map &:destroy
     end
     DatabaseCleaner.clean
   end
-
 end
-

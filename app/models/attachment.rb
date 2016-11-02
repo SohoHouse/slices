@@ -7,7 +7,7 @@ class Attachment
 
   embedded_in :object, polymorphic: true
 
-  def as_json *args
+  def as_json(*_args)
     result = attributes.symbolize_keys.except(:_id, :_type, :asset_id).merge(
       id: id.to_s,
       asset: asset.as_json,
@@ -20,6 +20,4 @@ class Attachment
 
     result
   end
-
 end
-

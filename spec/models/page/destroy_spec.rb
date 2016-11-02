@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Page, type: :model do
   describe "#destroy" do
-
     context "with no children" do
       before do
         home, parent = StandardTree.build_minimal
@@ -18,7 +17,6 @@ describe Page, type: :model do
       it "deletes the parent page" do
         expect('/parent').not_to be_findable
       end
-
     end
 
     context "with children" do
@@ -45,7 +43,6 @@ describe Page, type: :model do
       it "deletes the grand child path" do
         expect('/parent/child/grand-child').not_to be_findable
       end
-
     end
   end
 end

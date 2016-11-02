@@ -9,7 +9,7 @@ describe "Clicking 'View page on site' after changing the permalink", type: :req
       name:   'Example',
       path:   '/example',
       layout: 'default',
-      active: true
+      active: true,
     )
 
     sign_in_as_admin

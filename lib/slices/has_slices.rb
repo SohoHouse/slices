@@ -53,7 +53,7 @@ module Slices
       send(embed_name)
     end
 
-    def ordered_slices_for(embed_name=nil)
+    def ordered_slices_for(embed_name = nil)
       embed_name = self.class.slice_embeds.first if embed_name.nil?
       send("ordered_#{embed_name}")
     end
@@ -68,16 +68,16 @@ module Slices
     end
 
     def slice_errors_for(embed_name)
-      Hash.new.tap do |message|
+      {}.tap do |message|
         slices_for(embed_name).each do |slice|
-          if ! slice.valid? && ! slice.to_delete?
+          if !slice.valid? && !slice.to_delete?
             message[slice.id_or_client_id] = messages_from_errors(slice.errors)
           end
         end
       end
     end
 
-    def embeded_slices(&block)
+    def embeded_slices(&_block)
       self.class.slice_embeds.each do |embed_name|
         yield(embed_name)
       end

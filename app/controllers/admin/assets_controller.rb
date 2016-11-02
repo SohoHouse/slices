@@ -42,10 +42,10 @@ class Admin::AssetsController < Admin::AdminController
   private
 
   def asset_params
-    asset_params = params.permit([{asset: [:name, :tags]}, :file])
+    asset_params = params.permit([{ asset: [:name, :tags] }, :file])
     if asset_params.key?(:file)
       file = asset_params[:file]
-      file = URI(file.gsub(' ', '+')) if file.is_a?(String)
+      file = URI(file.tr(' ', '+')) if file.is_a?(String)
       { file: file }
     else
       asset_params[:asset]

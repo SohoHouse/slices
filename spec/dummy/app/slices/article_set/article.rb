@@ -39,13 +39,11 @@ class Article < Page
     %w[Will Alex Jez]
   end
 
-  def as_json options = {}
+  def as_json(options = {})
     super(options).merge(
       available_tags: available_tags,
       available_categories: available_categories,
-      images: images
+      images: images,
     )
   end
-
 end
-

@@ -12,14 +12,14 @@ module Slices
     end
 
     def self.determine_model(file)
-      segments = file[0 .. -4].split('/')
+      segments = file[0..-4].split('/')
       start = if segments.include?('slices')
                 segments.rindex('slices') + 2
               else
                 segments.rindex('models') + 1
               end
-      model_path = segments[start .. -1]
-      klass = model_path.map { |path| path.camelize }.join('::').constantize
+      model_path = segments[start..-1]
+      klass = model_path.map(&:camelize).join('::').constantize
       if klass.ancestors.include?(::Mongoid::Document) && !klass.embedded
         return klass
       end
@@ -39,7 +39,7 @@ namespace :slices do
     desc "Rename description field to meta_description"
     task meta_description: :environment do
       Page.collection.update({},
-        {'$rename' => {'description' => 'meta_description'}},
+        { '$rename' => { 'description' => 'meta_description' } },
         multi: true)
     end
   end

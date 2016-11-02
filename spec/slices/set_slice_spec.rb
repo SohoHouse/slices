@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SetSlice do
-
   class DummyPageSetSlice < SetSlice
   end
 
@@ -17,7 +16,7 @@ describe SetSlice do
       DummyPage.make(
         parent: set_page,
         permalink: 'dummy',
-        name: 'Dummy'
+        name: 'Dummy',
       )
       set_page
     end
@@ -36,6 +35,5 @@ describe SetSlice do
       end
       expect(article_slice.page_entries.length).to eq article_slice.per_page
     end
-
   end
 end

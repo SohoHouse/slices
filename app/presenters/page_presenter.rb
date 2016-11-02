@@ -8,7 +8,7 @@ class PagePresenter < Presenter
   end
 
   def editing_entry_content_slices?(entries)
-    set_page? && (! entries.nil?)
+    set_page? && (!entries.nil?)
   end
 
   def set_page?
@@ -47,16 +47,14 @@ class PagePresenter < Presenter
     @source.children
   end
 
-  def as_json(options={})
+  def as_json(_options = {})
     json = {
       '_id' => @source.id.to_s,
-      'url' => "/admin/pages/#{@source.id}"
+      'url' => "/admin/pages/#{@source.id}",
     }
-    self.class.columns.each do |key, val|
+    self.class.columns.each do |key, _val|
       json[key.to_s] = send(key)
     end
     json
   end
-
 end
-

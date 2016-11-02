@@ -32,7 +32,6 @@ shared_examples "updates slices correctly" do
 end
 
 describe "PUT to pages#update" do
-
   def new_slice
     {
       '_new'        => 1,
@@ -40,7 +39,7 @@ describe "PUT to pages#update" do
       'type'        => 'title',
       'position'    => 0,
       'title'       => 'New content',
-      'container'   => 'new_container_one'
+      'container'   => 'new_container_one',
     }
   end
 
@@ -48,7 +47,7 @@ describe "PUT to pages#update" do
     slide = {
       'position'    => 0,
       'asset_id'    => '4f0ead1cf622394081000004',
-      'asset_url'   => '/system/files/012012/4f0ead1cf622394081000004/admin/CIMG0565.JPG?1326361883'
+      'asset_url'   => '/system/files/012012/4f0ead1cf622394081000004/admin/CIMG0565.JPG?1326361883',
     }
 
     {
@@ -59,7 +58,7 @@ describe "PUT to pages#update" do
       'position'    => 0,
       'container'   => 'container_one',
 
-      'slides'      => [ slide ],
+      'slides'      => [slide],
 
       'attachments' => '',
       'asset_url'   => '',
@@ -97,7 +96,7 @@ describe "PUT to pages#update" do
       'layout'            => 'layout_three',
       'meta_description'  => 'This is an important page',
       'title'             => 'Title',
-      'slices'            => slices_data
+      'slices'            => slices_data,
     }
   end
 
@@ -107,14 +106,13 @@ describe "PUT to pages#update" do
     [container_one_slices, new_slice]
   end
 
-  def put_json(path, parameters = nil, headers = nil)
+  def put_json(path, parameters = nil, _headers = nil)
     put path, parameters.to_json, { 'CONTENT_TYPE' => Mime::JSON.to_s }
   end
 
   include_context "signed in as admin"
 
   context "with vaild data" do
-
     before do
       home, @page = StandardTree.build_minimal_with_slices
       I18n.with_locale(:de) do
@@ -131,12 +129,12 @@ describe "PUT to pages#update" do
     it_behaves_like "updates slices correctly"
 
     it "updates page attributes", i18n: true do
-      expect(json_response).to include({'name' => 'Updated parent'})
-      expect(json_response).to include({'active' => true})
-      expect(json_response).to include({'show_in_nav' => false})
-      expect(json_response).to include({'layout' => 'layout_three'})
-      expect(json_response).to include({'meta_description' => 'This is an important page'})
-      expect(json_response).to include({'title' => 'Title'})
+      expect(json_response).to include({ 'name' => 'Updated parent' })
+      expect(json_response).to include({ 'active' => true })
+      expect(json_response).to include({ 'show_in_nav' => false })
+      expect(json_response).to include({ 'layout' => 'layout_three' })
+      expect(json_response).to include({ 'meta_description' => 'This is an important page' })
+      expect(json_response).to include({ 'title' => 'Title' })
     end
 
     it "updates slice attributes", i18n: true do
@@ -150,7 +148,6 @@ describe "PUT to pages#update" do
       expect(container_one_slices.length).to eq 2
       expect(new_slice['title']).to eq 'New content'
     end
-
   end
 
   context "i18n", i18n: true do
@@ -159,7 +156,7 @@ describe "PUT to pages#update" do
       @slice = @page.slices.first
       @slice.title_translations = {
         en: 'en Title',
-        de: 'de Title'
+        de: 'de Title',
       }
       @page.save
     end
@@ -172,7 +169,7 @@ describe "PUT to pages#update" do
       expect(page.slices.first.attributes['title']).to eq({
         'de' => 'de Title',
         'en' => 'en Title',
-      })
+      },)
     end
 
     it "does not alter other locales" do
@@ -186,7 +183,7 @@ describe "PUT to pages#update" do
       expect(slice.attributes['title']).to eq({
         'en' => 'en Title',
         'de' => 'Updated Title',
-      })
+      },)
     end
   end
 
@@ -226,7 +223,6 @@ describe "PUT to pages#update" do
   end
 
   context "with validation errors" do
-
     before do
       home, @page = StandardTree.build_minimal_with_slices
       slices_data = content_slices_data(@page.slices)
@@ -244,15 +240,15 @@ describe "PUT to pages#update" do
     end
 
     it "has errors on page document" do
-      expect(json_response).to include({'name' => ["can't be blank"]})
+      expect(json_response).to include({ 'name' => ["can't be blank"] })
     end
 
     it "has errors on slices" do
       new_slice = json_errors['new_123']
-      expect(new_slice).to include({'title' => ["can't be blank"]})
+      expect(new_slice).to include({ 'title' => ["can't be blank"] })
 
       updated_slice = json_errors[@updated_slice_id]
-      expect(updated_slice).to include({'title' => ["can't be blank"]})
+      expect(updated_slice).to include({ 'title' => ["can't be blank"] })
     end
 
     it "does not remove the deleted slices" do
@@ -263,7 +259,6 @@ describe "PUT to pages#update" do
   end
 
   context "with validation errors on a deleted slice" do
-
     before do
       home, page = StandardTree.build_minimal_with_slices
       slices_data = content_slices_data(page.slices)
@@ -283,7 +278,6 @@ describe "PUT to pages#update" do
   end
 
   context "with a new asset slice" do
-
     before do
       home, page = StandardTree.build_minimal
       slices_data = [new_slideshow_slice]
@@ -295,7 +289,6 @@ describe "PUT to pages#update" do
     it "responds with success" do
       expect(response.code).to eq '200'
     end
-
   end
 
   context "updating an asset slice" do
@@ -326,13 +319,11 @@ describe "PUT to pages#update" do
     end
 
     context "when the slice attachments have translations" do
-      let(:slide) { SlideshowSlice::Slide.new(caption_translations: {'tr' => "tr caption", 'en' => "old"}) }
+      let(:slide) { SlideshowSlice::Slide.new(caption_translations: { 'tr' => "tr caption", 'en' => "old" }) }
 
       it "keeps any other translations", i18n: true do
-        expect(page.reload.slices[0].slides[0].caption_translations).to eq({'tr' => "tr caption", 'en' => "new"})
+        expect(page.reload.slices[0].slides[0].caption_translations).to eq({ 'tr' => "tr caption", 'en' => "new" })
       end
     end
   end
-
 end
-

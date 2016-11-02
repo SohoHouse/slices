@@ -5,7 +5,7 @@ class Snippet
   field :value
   index({ key: 1 })
 
-  scope :by_key, ->{ ascending(:key) }
+  scope :by_key, -> { ascending(:key) }
 
   # Finds the value of a snippet as a html_safe string
   #
@@ -20,7 +20,7 @@ class Snippet
   rescue Mongoid::Errors::DocumentNotFound
   end
 
-  def as_json(*args)
+  def as_json(*_args)
     {
       id: id.to_s,
       key: key,

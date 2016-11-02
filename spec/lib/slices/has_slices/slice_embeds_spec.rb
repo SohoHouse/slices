@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slices::HasSlices do
   describe ".slice_embeds" do
-
     it "has slice fields defined for Page" do
       expect(Page.slice_embeds).to eq [:slices]
     end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Creating a child page", type: :request, js: true do
-
   before do
     home, @parent = StandardTree.build_minimal
     StandardTree.add_complex(home, @parent)
@@ -13,7 +12,6 @@ describe "Creating a child page", type: :request, js: true do
   end
 
   context "with no errors" do
-
     before do
       visit "/admin/pages/new?parent_id=#{@parent.id}"
       within '#new_page' do
@@ -54,6 +52,5 @@ describe "Creating a child page", type: :request, js: true do
         expect(page).to have_css css, text: new_page_name
       end
     end
-
   end
 end

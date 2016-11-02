@@ -1,11 +1,10 @@
 require 'spec_helper'
 
-describe "Admin Snippets", %q{
+describe "Admin Snippets", '
   In order to keep the site up to date
   As an admin user
   I want to edit snippets
-}, type: :request, js: true do
-
+', type: :request, js: true do
   before do
     StandardTree.build_minimal
     @hello = Snippet.create(key: 'en.hello', value: 'Hello')
@@ -28,6 +27,4 @@ describe "Admin Snippets", %q{
     expect(page).to have_css('tbody tr', count: 2)
     expect(page).to have_css('tbody tr', text: 'Courage Wolf')
   end
-
 end
-

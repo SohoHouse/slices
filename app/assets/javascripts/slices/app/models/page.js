@@ -105,7 +105,7 @@ slices.model.Page = (
           slicesInContainers[slice.container].push(slice);
         } catch(error) {
           if (console != undefined) {
-            console.log("Error, missing container on slice?", error, slice);
+            //console.log("Error, missing container on slice?", error, slice);
           }
         }
       });

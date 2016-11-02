@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SnippetsHelper, type: :helper do
-
   def stub_snippet(key, result)
     expect(Snippet).to receive(:find_for_key).
       with(key).

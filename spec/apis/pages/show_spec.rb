@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "GET to pages#show" do
-
   include_context "signed in as admin"
 
   context "a normal page" do
@@ -15,19 +14,18 @@ describe "GET to pages#show" do
     end
 
     it "has page attributes" do
-      expect(json_response).to include({'name' => 'Parent'})
-      expect(json_response).to include({'layout' => 'default'})
+      expect(json_response).to include({ 'name' => 'Parent' })
+      expect(json_response).to include({ 'layout' => 'default' })
     end
 
     it "has slice attributes" do
-      expect(json_slices[0]).to include({'title' => 'Title'})
+      expect(json_slices[0]).to include({ 'title' => 'Title' })
       slice_id = @page.slices.first.id.to_s
-      expect(json_slices[0]).to include({'id' => slice_id})
+      expect(json_slices[0]).to include({ 'id' => slice_id })
     end
   end
 
   context "as set entry page" do
-
     before do
       home, parent = StandardTree.build_minimal
       @page, articles = StandardTree.add_article_set(home)
@@ -43,6 +41,4 @@ describe "GET to pages#show" do
       expect(json_response).not_to include :name
     end
   end
-
 end
-

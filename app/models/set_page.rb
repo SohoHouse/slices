@@ -1,9 +1,8 @@
 class SetPage < Page
-
   has_slices :set_slices
 
   def entry_types
-    sets.map { |set| set.entry_type }
+    sets.map(&:entry_type)
   end
 
   def entries(type)

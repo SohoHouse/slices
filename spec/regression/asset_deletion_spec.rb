@@ -23,14 +23,14 @@ describe "Asset deletion" do
     MyPage.create!(
       name: 'Test page with its own attachments',
       images: [{ asset_id: asset_1.id }],
-      slices: [MySlice.new(images: [{ asset_id: asset_1.id }, { asset_id: asset_2.id }])]
+      slices: [MySlice.new(images: [{ asset_id: asset_1.id }, { asset_id: asset_2.id }])],
     )
   end
 
   let! :page_2 do
     Page.create!(
       name: 'Test page with only slice attachments',
-      slices: [MySlice.new(images: [{ asset_id: asset_1.id }])]
+      slices: [MySlice.new(images: [{ asset_id: asset_1.id }])],
     )
   end
 
@@ -44,5 +44,4 @@ describe "Asset deletion" do
     expect(page_1.slices.first.images.length).to eq 1
     expect(page_2.slices.first.images).to be_empty
   end
-
 end

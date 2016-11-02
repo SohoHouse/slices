@@ -12,4 +12,3 @@ module AssetMacros
   end
 
 end
-

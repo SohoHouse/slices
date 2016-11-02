@@ -1,7 +1,6 @@
 module Slices
   class CmsFormBuilder < ActionView::Helpers::FormBuilder
-
-    FIELD_ERROR_PROC = proc do |html_tag, instance_tag|
+    FIELD_ERROR_PROC = proc do |html_tag, _instance_tag|
       html_tag
     end
 
@@ -30,7 +29,7 @@ module Slices
       end
     end
 
-    def with_custom_field_error_proc(&block)
+    def with_custom_field_error_proc(&_block)
       default_field_error_proc = ::ActionView::Base.field_error_proc
       ::ActionView::Base.field_error_proc = FIELD_ERROR_PROC
       yield

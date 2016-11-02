@@ -9,7 +9,7 @@ describe "The set entries view", type: :request, js: true do
     # Define predictable order
     set_page.set_slice('Article').update_attributes(
       sort_field: 'name',
-      sort_direction: 'asc'
+      sort_direction: 'asc',
     )
     visit admin_page_entries_path page_id: set_page.id
   end
@@ -70,17 +70,17 @@ describe "When sort_field is set to :position", type: :request, js: true do
     first_entry = Article.make(
       parent: set_page,
       name: 'ZZZ',
-      position: 0
+      position: 0,
     )
     second_entry = Article.make(
       parent: set_page,
       name: 'AAA',
-      position: 1
+      position: 1,
     )
     thrid_entry = Article.make(
       parent: set_page,
       name: '111',
-      position: 2
+      position: 2,
     )
 
     sign_in_as_admin

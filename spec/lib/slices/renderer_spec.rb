@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Slices::Renderer do
-
   let :rendered_container_one do
     "<h1>Title</h1>\n"
   end
@@ -22,8 +21,8 @@ describe Slices::Renderer do
     let :renderer do
       Slices::Renderer.new({
         current_page: page,
-        slices: slices
-      })
+        slices: slices,
+      },)
     end
 
     it "renders container one" do
@@ -39,7 +38,7 @@ describe Slices::Renderer do
     let :renderer do
       Slices::Renderer.new({
         current_page: page
-      })
+      },)
     end
 
     it "renders container one" do
@@ -55,8 +54,8 @@ describe Slices::Renderer do
     let :renderer do
       Slices::Renderer.new({
         current_page: page,
-        slices: slices
-      })
+        slices: slices,
+      },)
     end
 
     let :expected do
@@ -68,4 +67,3 @@ describe Slices::Renderer do
     end
   end
 end
-

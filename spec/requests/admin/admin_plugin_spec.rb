@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Extending a slice with javascript", type: :request, js: true do
-
   before do
     sign_in_as_admin
   end
@@ -12,7 +11,6 @@ describe "Extending a slice with javascript", type: :request, js: true do
   end
 
   describe "the plugin in admin.js should run", js: true do
-
     context "when the slice is added" do
       before do
         visit admin_page_path my_page
@@ -42,7 +40,5 @@ describe "Extending a slice with javascript", type: :request, js: true do
         expect(page).to have_select "Where are we going for lunch today?", selected: "Arthur’s"
       end
     end
-
   end
-
 end

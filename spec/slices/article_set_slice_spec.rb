@@ -12,7 +12,7 @@ describe ArticleSetSlice do
       path:   '/blog',
       slices: [
         ArticleSetSlice.new(container: 'container_one', per_page: 5)
-      ]
+      ],
     )
   end
 
@@ -30,7 +30,7 @@ describe ArticleSetSlice do
             permalink:    "article-#{n}",
             published_at: n.days.ago.at_beginning_of_day,
             active:       true,
-            show_in_nav:  true
+            show_in_nav:  true,
           )
         end
       end

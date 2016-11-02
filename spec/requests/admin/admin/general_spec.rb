@@ -35,7 +35,6 @@ describe "Administering Admins", type: :request, js: true do
         expect(page).to have_css 'tbody tr', count: 2
       end
     end
-
   end
 
   context "viewing the index with 2 admins" do
@@ -43,7 +42,7 @@ describe "Administering Admins", type: :request, js: true do
       Admin.create!(
         name: 'Jamie White',
         email: 'jamie@jgwhite.co.uk',
-        password: 'ilovejam'
+        password: 'ilovejam',
       )
 
       visit '/admin/admins'

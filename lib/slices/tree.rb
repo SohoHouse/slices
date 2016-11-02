@@ -39,7 +39,7 @@ module Slices
       field :position, type: Integer
       field :show_in_nav, type: Boolean, default: false
 
-      scope :minimal, ->{ only(%w(_id _type page_id path external_url name has_content)) }
+      scope :minimal, -> { only(%w(_id _type page_id path external_url name has_content)) }
       index({ path: 1 }, { unique: true })
 
       belongs_to :page
@@ -120,7 +120,7 @@ module Slices
     # @return [Mongoid::Criteria]
     #
     def children
-      Page.where(page_id: self.id).ascending(:position)
+      Page.where(page_id: id).ascending(:position)
     end
 
     # A list of the page's ancestors
@@ -240,7 +240,7 @@ module Slices
     # @return [Mongoid::Criteria]
     #
     def entry_children
-      children.where(:_type.nin => ['Page', 'SetPage'])
+      children.where(:_type.nin => %w(Page SetPage))
     end
 
     # Recusivly decend from this page and update each descendants path,
@@ -299,7 +299,7 @@ module Slices
       if parent.present? && path_changed?
         matching_paths = siblings.where(path: /#{path}(-\d+)?$/)
         if matching_paths.any?
-          self.path << "-#{matching_paths.length}"
+          path << "-#{matching_paths.length}"
         end
       end
     end

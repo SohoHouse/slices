@@ -15,9 +15,7 @@ shared_examples_for "a valid slice description" do
 end
 
 describe Slices::AvailableSlices do
-
   describe ".all" do
-
     let :all do
       Slices::AvailableSlices.all
     end
@@ -85,6 +83,4 @@ describe Slices::AvailableSlices do
       end
     end
   end
-
 end
-

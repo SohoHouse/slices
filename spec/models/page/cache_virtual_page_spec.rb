@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Page, type: :model do
-
   context "#cache_virtual_page" do
     let :page do
       StandardTree.build_minimal.last
@@ -12,6 +11,4 @@ describe Page, type: :model do
       page.save
     end
   end
-
 end
-

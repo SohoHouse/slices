@@ -373,4 +373,3 @@ describe SliceGenerator do
     end
   end
 end
-

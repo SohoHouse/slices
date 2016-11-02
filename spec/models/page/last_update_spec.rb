@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Page, type: :model do
-
   describe "#update_last_changed_at" do
     it "updates the last changed when a page is saved" do
       page = Page.new(name: 'Page')

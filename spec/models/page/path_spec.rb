@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Page, type: :model do
   describe "setting the path" do
-
     before do
       home, page = StandardTree.build_minimal
       StandardTree.add_complex(home, page)

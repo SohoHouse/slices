@@ -11,4 +11,3 @@ module ControllerHelpers
     expect(response.headers).to include 'Expires'
   end
 end
-

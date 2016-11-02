@@ -42,6 +42,4 @@ class Admin
       super_user: super_user,
     }
   end
-
 end
-

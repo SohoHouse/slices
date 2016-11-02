@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Admin::AssetsController, type: :controller do
-
   before do
     sign_in_as_admin
   end
@@ -32,7 +31,7 @@ describe Admin::AssetsController, type: :controller do
       end
 
       it "converts the url string into a URI object" do
-        uri = URI(url.gsub(' ', '+'))
+        uri = URI(url.tr(' ', '+'))
         expect(Asset).to receive(:make).with(file: uri)
 
         post :create, file: url, format: :json
@@ -86,4 +85,3 @@ describe Admin::AssetsController, type: :controller do
     end
   end
 end
-

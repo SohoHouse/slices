@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Layout, type: :model do
   describe "#files" do
-
     subject { Layout.files.map { |p| p.split('/').last } }
 
     it 'finds layouts in app/view/layouts' do

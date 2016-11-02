@@ -5,7 +5,7 @@ module MongoBasicSearch
         []
       else
         text.mb_chars.normalize(:kd).to_s
-          .gsub(/[^\x00-\x7F]/,'')
+          .gsub(/[^\x00-\x7F]/, '')
           .downcase
           .split(/[\s\.\-_]+/)
       end
@@ -36,12 +36,13 @@ module MongoBasicSearch
 
       def basic_text_search(query)
         words = KeywordsExtractor.extract(query).map { |word| /#{word}/ }
-        self.send("#{self.match}_in", _keywords: words)
+        send("#{self.match}_in", _keywords: words)
       end
 
     end
 
     private
+
       def set_keywords
         self._keywords = []
         search_fields.each do |field|
@@ -55,7 +56,7 @@ module MongoBasicSearch
             extract_keywords(self[field])
           end
         end
-        self._keywords.uniq!
+        _keywords.uniq!
       end
 
       def extract_keywords(text)

@@ -6,7 +6,6 @@ describe PageObserver do
   end
 
   context "#around_save" do
-
     let! :original_asset do
       double :original_asset
     end
@@ -16,13 +15,12 @@ describe PageObserver do
     end
 
     context "attachement assets have changed and page has not changed" do
-
       let :page do
         double({
           attachment_assets: [new_asset],
           assets: [original_asset],
-          path: '/'
-        })
+          path: '/',
+        },)
       end
 
       before do
@@ -43,7 +41,6 @@ describe PageObserver do
     end
 
     context "attachement assets have not changed and neither has page" do
-
       let :page do
         double(path: '/')
       end
@@ -60,13 +57,12 @@ describe PageObserver do
     end
 
     context "attachement assets have not changed but the page has" do
-
       let :page do
         double({
           attachment_assets: [original_asset],
           assets: [original_asset],
-          path: '/'
-        })
+          path: '/',
+        },)
       end
 
       before do
@@ -82,7 +78,6 @@ describe PageObserver do
         subject.around_save(page) {}
       end
     end
-
   end
 
   context "#attachment_assets_changed? and #did_attachment_assets_change?" do
@@ -90,7 +85,7 @@ describe PageObserver do
       let :page do
         double(
           attachment_asset_ids: [BSON::ObjectId.new],
-          asset_ids: [BSON::ObjectId.new]
+          asset_ids: [BSON::ObjectId.new],
         )
       end
 
@@ -116,7 +111,7 @@ describe PageObserver do
       let :page do
         double(
           attachment_asset_ids: [object_id],
-          asset_ids: [object_id]
+          asset_ids: [object_id],
         )
       end
 
@@ -151,4 +146,3 @@ describe PageObserver do
     end
   end
 end
-

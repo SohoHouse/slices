@@ -1,6 +1,6 @@
 module AssetHelpers
 
-  def file_fixture name = 'lady bird.jpg'
+  def file_fixture(name = 'lady bird.jpg')
     File.open file_fixture_path.join name
   end
 
@@ -9,4 +9,3 @@ module AssetHelpers
   end
 
 end
-

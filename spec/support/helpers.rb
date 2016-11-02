@@ -5,7 +5,7 @@ module RequestHelpers
     expect(page).to have_stopped_communicating
   end
 
-  def hover_over_asset_thumb selector = '.asset-library-item:first'
+  def hover_over_asset_thumb(selector = '.asset-library-item:first')
     page.execute_script "$('#{selector} dl').css({ visibility: 'visible' })"
   end
 end

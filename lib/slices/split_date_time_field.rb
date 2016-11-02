@@ -4,11 +4,10 @@ module Slices #:nodoc:
 
     module ClassMethods #:nodoc:
 
-      def split_date_time_field(name)
+      def split_date_time_field(_name)
         raise Error, 'Split date time is depreciated use dateField instead'
       end
 
     end
   end
 end
-

@@ -2,17 +2,16 @@ require 'spec_helper'
 
 describe Slices::HasSlices do
   describe ".basic_text_search_in" do
-
     class DummySlice < Slice
       field :title, type: String
       field :dummy_id, type: String
     end
 
-    def make_slice(title, position)
+    def make_slice(title, _position)
       DummySlice.new(
         title: title,
         container: "container_one",
-        dummy_id: "1234"
+        dummy_id: "1234",
       )
     end
 

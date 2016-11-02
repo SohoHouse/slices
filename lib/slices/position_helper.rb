@@ -7,7 +7,7 @@ module Slices
     #
     def peers
       @peers ||= normal_or_set_page.ordered_slices.select do |slice|
-        slice.container == self.container
+        slice.container == container
       end
     end
 

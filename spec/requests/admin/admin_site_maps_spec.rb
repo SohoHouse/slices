@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "The site map", type: :request, js: true do
-
   before do
     home, @page = StandardTree.build_minimal
     sign_in_as_admin

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Admin::PageSearchController, type: :controller do
-
   describe "GET show :query = 'about', format: :json" do
     before do
       StandardTree.build_minimal
@@ -10,12 +9,12 @@ describe Admin::PageSearchController, type: :controller do
           name:        name,
           parent:      Page.home,
           active:      true,
-          show_in_nav: true
+          show_in_nav: true,
         )
         page.slices.build({
           title:     "Title",
           container: "container_one",
-          position:  0
+          position:  0,
         }, TitleSlice)
         page.save!
       end
@@ -35,5 +34,4 @@ describe Admin::PageSearchController, type: :controller do
       expect(response.body).to eq(Page.where(name: /about/i, role: nil).limit(5).as_json({}).to_json)
     end
   end
-
 end

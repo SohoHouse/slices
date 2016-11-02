@@ -4,7 +4,7 @@ class ArticlePresenter < PagePresenter
   @columns = {
     name: 'Name',
     content: 'Content',
-    published_at: 'Date Published'
+    published_at: 'Date Published',
   }
   class << self
     attr_reader :columns
@@ -23,7 +23,7 @@ class ArticlePresenter < PagePresenter
   end
 
   def content
-    slice = @source.slices.detect { |s| s.kind_of?(TextileSlice) }
+    slice = @source.slices.detect { |s| s.is_a?(TextileSlice) }
     text = slice.try(:textile)
     text.blank? ? '(no content)' : truncate(text, length: 63)
   end
@@ -31,5 +31,4 @@ class ArticlePresenter < PagePresenter
   def published_at
     @source.published_at || '-'
   end
-
 end

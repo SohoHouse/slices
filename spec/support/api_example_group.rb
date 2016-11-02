@@ -37,4 +37,3 @@ end
 RSpec.configure do |config|
   config.include RSpec::Rails::ApiExampleGroup, type: :api, file_path: %r{spec/apis}
 end
-

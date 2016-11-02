@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe 'Slices::Asset::Rename' do
-
   describe ".run" do
     it "initializes a Filesystem renamer" do
-      file = double(options: {storage: :filesystem})
+      file = double(options: { storage: :filesystem })
       new_file_name = 'fn'
       expect_any_instance_of(Slices::Asset::Rename::Filesystem).to receive(:run)
 
@@ -12,7 +11,7 @@ describe 'Slices::Asset::Rename' do
     end
 
     it "raises an error for missing renamers" do
-      file = double(options: {storage: :unknown})
+      file = double(options: { storage: :unknown })
       expect {
         Slices::Asset::Rename.run file, 'new_file_name'
       }.to raise_error Slices::Asset::Rename::UnsupportedStorage
@@ -33,7 +32,7 @@ describe 'Slices::Asset::Rename' do
 
   context "Fog#rename" do
     before do
-      Paperclip::Attachment.default_options.merge!( {
+      Paperclip::Attachment.default_options.merge!({
         storage: :fog,
         fog_directory: 'directory',
         fog_credentials: {
@@ -41,7 +40,7 @@ describe 'Slices::Asset::Rename' do
           aws_access_key_id: 'aws_access_key_id',
           aws_secret_access_key: 'aws_secret_access_key',
         },
-      })
+      },)
 
       Asset.attachment_definitions[:file][:url] = '/system/:style/:filename'
       Fog.mock!
@@ -81,6 +80,5 @@ describe 'Slices::Asset::Rename' do
       files = renamer.directory.files.map(&:key)
       expect(files).to include "original/#{new_name}"
     end
-
   end
 end

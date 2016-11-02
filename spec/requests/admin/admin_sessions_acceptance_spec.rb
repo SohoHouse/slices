@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Authentication for /admin", type: :request, js: true do
-
   it "should sign in and redirect to '/admin/site_maps'" do
     Admin.create!(email: 'hello@withassociates.com', password: '123456')
     StandardTree.build_minimal
@@ -40,4 +39,3 @@ describe "Authentication for /admin", type: :request, js: true do
     expect(page.current_path).to eq('/admin/site_maps')
   end
 end
-

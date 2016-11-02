@@ -97,6 +97,5 @@ describe "An article set", type: :request do
         expect(page).to have_css '.container_two p:nth-child(3)', text: 'prepared'
       end
     end
-
   end
 end

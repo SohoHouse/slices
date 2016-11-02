@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Admin::SiteMapsController, type: :controller do
-
   before do
     sign_in_as_admin
   end
@@ -42,8 +41,5 @@ describe Admin::SiteMapsController, type: :controller do
     it "responds with success" do
       expect(response).to be_success
     end
-
   end
-
 end
-

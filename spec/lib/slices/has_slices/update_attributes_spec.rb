@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slices::HasSlices do
   describe "#update_attributes" do
-
     let :set_page do
       SetPage.create!(name: 'content')
     end
@@ -21,10 +20,9 @@ describe Slices::HasSlices do
     end
 
     context "with an existing slice" do
-
       it "update the meta_description (on page)" do
-        set_page.update_attributes({meta_description: 'Updated Description',
-                                    slices: [json_slice]})
+        set_page.update_attributes({ meta_description: 'Updated Description',
+                                    slices: [json_slice] })
         set_page.reload
 
         expect(set_page.meta_description).to eq "Updated Description"
@@ -32,7 +30,7 @@ describe Slices::HasSlices do
 
       it "update the title" do
         json_slice["title"] = "Updated Title"
-        set_page.update_attributes({slices: [json_slice]})
+        set_page.update_attributes({ slices: [json_slice] })
         set_page.reload
 
         expect(set_page.slices.first.title).to eq "Updated Title"
@@ -40,7 +38,7 @@ describe Slices::HasSlices do
 
       it "delete a slice" do
         json_slice[:_destroy] = true
-        set_page.update_attributes({slices: [json_slice]})
+        set_page.update_attributes({ slices: [json_slice] })
         set_page.reload
 
         expect(set_page.slices.length).to eq 0
@@ -50,7 +48,7 @@ describe Slices::HasSlices do
         new_slice = { "type" => "title", "position" => 1, "title" => "New Slice",
                       "container" => "container_one", "client_id" => "__new_1" }
 
-        set_page.update_attributes({slices: [json_slice, new_slice]})
+        set_page.update_attributes({ slices: [json_slice, new_slice] })
         new_slice = set_page.slices.last
 
         expect(set_page.slices.length).to eq 2
@@ -63,7 +61,7 @@ describe Slices::HasSlices do
                       "container" => "container_one", "client_id" => "__new_1" }
 
         json_slice['title'] = ''
-        set_page.update_attributes({slices: [json_slice, new_slice] })
+        set_page.update_attributes({ slices: [json_slice, new_slice] })
         new_slice = set_page.slices.last
 
         expect(set_page.slices.length).to eq 2
@@ -75,7 +73,7 @@ describe Slices::HasSlices do
     context "with an existing slice and errors" do
       it "add errors to context via json" do
         json_slice["title"] = ""
-        set_page.update_attributes({slices: [json_slice]})
+        set_page.update_attributes({ slices: [json_slice] })
         expect(set_page).not_to be_valid
       end
 
@@ -106,7 +104,7 @@ describe Slices::HasSlices do
 
         it "converts the errors into JSON string" do
           error_json = { slices: [
-            {slice.id => { title: ["can't be blank"]}}
+            { slice.id => { title: ["can't be blank"] } },
           ] }.to_json
 
           expect(set_page.errors.to_json).to eq error_json
@@ -144,14 +142,13 @@ describe Slices::HasSlices do
       it "update the title on both slice embeds" do
         json_slice["title"] = "Updated Title"
         json_set_slice["title"] = "Updated Set Title"
-        set_page.update_attributes({slices: [json_slice],
-                                    set_slices: [json_set_slice]})
+        set_page.update_attributes({ slices: [json_slice],
+                                    set_slices: [json_set_slice] })
         set_page.reload
 
         expect(set_page.slices.first.title).to eq "Updated Title"
         expect(set_page.set_slices.first.title).to eq "Updated Set Title"
       end
     end
-
   end
 end

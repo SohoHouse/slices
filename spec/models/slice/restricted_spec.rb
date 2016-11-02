@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe Slice, type: :model do
   describe ".restricted" do
-
     class TestSlice < Slice; end
-    class RestricedSlice < Slice;
+    class RestricedSlice < Slice
       restricted_slice
     end
 
@@ -19,6 +18,5 @@ describe Slice, type: :model do
         expect(TestSlice).not_to be_restricted
       end
     end
-
   end
 end

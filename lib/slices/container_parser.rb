@@ -44,7 +44,7 @@ module Slices
       @containers[name] = options.reverse_merge name: name.titleize
     end
 
-    def method_missing(meth, *args, &block)
+    def method_missing(_meth, *_args, &_block)
       yield if block_given?
     end
 
@@ -63,8 +63,7 @@ module Slices
     end
 
     def convert_slice_class_to_symbol(klass)
-      klass.name.underscore.split('_')[0 .. -2].join('_').to_sym
+      klass.name.underscore.split('_')[0..-2].join('_').to_sym
     end
   end
 end
-

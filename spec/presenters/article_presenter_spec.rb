@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ArticlePresenter do
-
   let :article do
     home, parent = StandardTree.build_minimal
     set_page, articles = StandardTree.add_article_set(home)
@@ -33,7 +32,7 @@ describe ArticlePresenter do
 
     it "truncates the article's content" do
       slice = article.slices.detect do |slice|
-        slice.kind_of?(TextileSlice)
+        slice.is_a?(TextileSlice)
       end
       slice.textile = '0123456789' * 10
       truncated = ('0123456789' * 6) + '...'
@@ -62,7 +61,7 @@ describe ArticlePresenter do
 
   context "when article is missing some data" do
     before do
-      article.slices.each { |s| s.destroy }
+      article.slices.each(&:destroy)
       article.name = ''
       article.published_at = nil
     end
@@ -80,4 +79,3 @@ describe ArticlePresenter do
     end
   end
 end
-

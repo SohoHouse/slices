@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slice, type: :model do
   describe "#as_json" do
-
     let :slice do
       TextileSlice.new(title: 'Title',
                        container: 'container_one',

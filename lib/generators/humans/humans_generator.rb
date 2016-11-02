@@ -6,5 +6,4 @@ class HumansGenerator < Rails::Generators::Base
   def copy_humans_txt
     copy_file 'humans.txt', 'public/humans.txt'
   end
-
 end

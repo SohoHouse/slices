@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Restricted slice", type: :request, js: true do
-
   let! :my_page do
     home, my_page = StandardTree.build_minimal_with_slices
     my_page.slices << slice
@@ -42,6 +41,4 @@ describe "Restricted slice", type: :request, js: true do
       expect(page).to have_css "#slice-#{slice.id} .delete"
     end
   end
-
 end
-

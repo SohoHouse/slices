@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Page, type: :model do
-
   context "tree building" do
-
     before do
       home = Page.create!(name: 'Home', path: '/')
       parent = Page.create!(name: 'Parent', path: '/parent')
@@ -27,7 +25,6 @@ describe Page, type: :model do
     it "includes @parent in @home.children" do
       expect(@home.children.entries).to include @parent
     end
-
   end
 
   context "tree navigating" do
@@ -96,7 +93,6 @@ describe Page, type: :model do
     end
 
     context "the child page (parent's first child)" do
-
       it "is the first sibling" do
         expect(child).to be_first_sibling
       end
@@ -119,7 +115,6 @@ describe Page, type: :model do
     end
 
     context "the sibling page (parent's middle child)" do
-
       it "is not the first sibling" do
         expect(sibling).not_to be_first_sibling
       end
@@ -142,7 +137,6 @@ describe Page, type: :model do
     end
 
     context "the youngest page (parent's youngest child)" do
-
       it "is not the first sibling" do
         expect(youngest).not_to be_first_sibling
       end
@@ -164,5 +158,4 @@ describe Page, type: :model do
       end
     end
   end
-
 end

@@ -1,5 +1,4 @@
 shared_context "signed in as admin" do
-
   let! :admin do
     Admin.create! email: 'hello@withassociates.com',
       password: '123456'
@@ -15,6 +14,4 @@ shared_context "signed in as admin" do
   before type: :api do
     post admin_session_path admin: { email: admin.email, password: admin.password }
   end
-
 end
-

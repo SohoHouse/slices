@@ -51,12 +51,12 @@ describe NavigationHelper, type: :helper do
     tags.gsub(/\n/, '').gsub(/> +</, '><').strip
   end
 
-  def assert_html_equivalent(expected, actual=output_buffer)
+  def assert_html_equivalent(expected, actual = output_buffer)
     expect(stripped_html(actual)).to eq stripped_html(expected)
   end
 
   def navigation_for_level(level, depth)
-    if (level == :primary)
+    if level == :primary
       send("#{level}_navigation")
     else
       send("#{level}_navigation", depth: depth)
@@ -64,7 +64,6 @@ describe NavigationHelper, type: :helper do
   end
 
   context "when pages exist" do
-
     before do
       StandardTree.build_complex
       StandardTree.add_cousins(Page.find_by_path('/uncle'))
@@ -72,7 +71,6 @@ describe NavigationHelper, type: :helper do
     end
 
     context "#primary_navigation" do
-
       it_renders_for('/', :primary) do
         <<-EOF
         <ul id="primary_navigation">
@@ -146,7 +144,6 @@ describe NavigationHelper, type: :helper do
           </ul>
           EOF
         end
-
       end
 
       context "when pages are not shown in nav" do
@@ -175,7 +172,6 @@ describe NavigationHelper, type: :helper do
           </ul>
           EOF
         end
-
       end
 
       context "when home page isn't shown in nav" do
@@ -204,7 +200,6 @@ describe NavigationHelper, type: :helper do
           </ul>
           EOF
         end
-
       end
 
       context "when parent has no slices" do
@@ -238,7 +233,6 @@ describe NavigationHelper, type: :helper do
           </ul>
           EOF
         end
-
       end
     end
 
@@ -457,7 +451,5 @@ describe NavigationHelper, type: :helper do
         </ul>
       EOF
     end
-
   end
 end
-

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe AssetObserver do
-
   let :asset do
     double.as_null_object
   end
@@ -16,6 +15,4 @@ describe AssetObserver do
       subject.after_validation asset
     end
   end
-
 end
-

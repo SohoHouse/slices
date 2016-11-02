@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Searching the Asset Library", type: :request, js: true do
-
   before do
     create_asset_fixtures
     sign_in_as_admin
@@ -18,6 +17,4 @@ describe "Searching the Asset Library", type: :request, js: true do
     expect(page.body).to include "lady_bird.jpg"
     expect(page.body).not_to include "pepper-pot.jpg"
   end
-
 end
-

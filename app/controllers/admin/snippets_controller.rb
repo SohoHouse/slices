@@ -35,4 +35,3 @@ class Admin::SnippetsController < Admin::AdminController
     params.require(:snippet).permit(:key, :value)
   end
 end
-

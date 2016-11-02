@@ -13,5 +13,4 @@ describe "The page editor title", type: :request, js: true do
   it "Uses the page name as the Title" do
     expect(page).to have_title 'Home'
   end
-
 end
