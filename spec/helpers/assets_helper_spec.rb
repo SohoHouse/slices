@@ -5,7 +5,7 @@ describe AssetsHelper, type: :helper do
 
   let :asset do
     double(:asset,
-        present?: true,
+      present?: true,
         ).as_null_object
   end
 
@@ -14,7 +14,6 @@ describe AssetsHelper, type: :helper do
   end
 
   context "#image_if_present" do
-
     it "is nil with a missing image" do
       expect(image_if_present(nil, :foo)).to be_nil
     end
@@ -59,13 +58,12 @@ describe AssetsHelper, type: :helper do
       it "allows custom alt attributes" do
         expect(image_if_present(asset, :admin, alt: 'bar')).to have_xpath('//img[@alt="bar"]')
       end
-
     end
 
     context "with an attachement" do
       let :attachement do
         double(:attachement,
-             asset: asset
+          asset: asset,
             )
       end
 
@@ -77,12 +75,10 @@ describe AssetsHelper, type: :helper do
         expect(image).to have_xpath('//img[@height="60"]')
         expect(image).to have_xpath('//img[@width="80"]')
       end
-
     end
   end
 
   context "#link_image_if_linkable" do
-
     it "is nil when passed a nil link and a nil image" do
       expect(link_image_if_linkable(nil, nil, :admin)).to be_nil
     end
@@ -92,7 +88,6 @@ describe AssetsHelper, type: :helper do
     end
 
     context "with :admin image size" do
-
       before do
         expect(asset).to receive(:dimensions_for).with(:admin).and_return('180x180')
         expect(asset).to receive(:url_for).with(:admin).and_return(image_url)
@@ -115,12 +110,10 @@ describe AssetsHelper, type: :helper do
       end
 
       it "allows options on the image as well" do
-        image = link_image_if_linkable("/foo/bar", asset, :admin, class: "arc", image_options: {class: "otter"})
+        image = link_image_if_linkable("/foo/bar", asset, :admin, class: "arc", image_options: { class: "otter" })
         expect(image).to have_xpath("//a[@class='arc']")
         expect(image).to have_xpath("//img[@class='otter']")
       end
     end
   end
-
 end
-

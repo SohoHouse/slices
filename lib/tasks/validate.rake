@@ -9,7 +9,7 @@ module Slices
       def initialize(host, path)
         document = open('http://' + host + path)
         self.body = document.present? ? document.read : nil
-        self.body.gsub!(/\?[0-9]{10}/, '') # remove cache busting
+        body.gsub!(/\?[0-9]{10}/, '') # remove cache busting
       rescue OpenURI::HTTPError
       end
 
@@ -30,7 +30,6 @@ module Slices
           file.flush
         end
       end
-
     end
 
     def self.validate(local, remote)
@@ -45,13 +44,11 @@ module Slices
           puts ''
         end
       end
-
     end
   end
 end
 
 namespace :slices do
-
   desc "Validate localhost is the same is live"
   task valdiate: :environment do
     remote = ENV['HOST']
@@ -59,4 +56,3 @@ namespace :slices do
     Slices::Tasks.validate(remote, local)
   end
 end
-

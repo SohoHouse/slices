@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slice, type: :model do
   describe "#write_attributes" do
-
     context "when the slice has an embedded relation" do
       class Embeddable
         include Mongoid::Document
@@ -15,8 +14,8 @@ describe Slice, type: :model do
       end
 
       let(:slice) { TestSlice.new(normal_page: Page.new) }
-      let(:embedded_attrs) { {data: "data"} }
-      let(:slice_attrs) { {embeddables: [embedded_attrs]} }
+      let(:embedded_attrs) { { data: "data" } }
+      let(:slice_attrs) { { embeddables: [embedded_attrs] } }
 
       subject do
         slice.write_attributes(slice_attrs)
@@ -37,7 +36,7 @@ describe Slice, type: :model do
         let :embedded_attrs do
           {
             _id: embeddable.id,
-            data: "new"
+            data: "new",
           }
         end
 
@@ -54,7 +53,7 @@ describe Slice, type: :model do
         end
 
         context "when embeddable field is nil in attributes" do
-          let(:slice_attrs) { {embeddables: nil} }
+          let(:slice_attrs) { { embeddables: nil } }
 
           it "deletes embeddable" do
             expect(subject).to be_nil
@@ -62,6 +61,5 @@ describe Slice, type: :model do
         end
       end
     end
-
   end
 end

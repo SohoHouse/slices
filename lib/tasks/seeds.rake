@@ -47,7 +47,7 @@ module Slices
       admin = Admin.create!(
         name: ask('Enter a name: '),
         email: ask('Enter an email address: '),
-        password: ask('Enter a password: ') { |q| q.echo = false }
+        password: ask('Enter a password: ') { |q| q.echo = false },
       )
       admin.super_user = true
       admin.save!
@@ -90,4 +90,3 @@ namespace :slices do
     Slices::Tasks.make_all
   end
 end
-

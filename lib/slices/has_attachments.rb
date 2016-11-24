@@ -6,7 +6,7 @@ module Slices
 
       def has_attachments(embed_name = :attachments, options = {})
         attachment_fields << embed_name
-        embeds_many embed_name, {class_name: "Attachment", as: :object}.merge(options)
+        embeds_many embed_name, { class_name: "Attachment", as: :object }.merge(options)
       end
 
       def attachment_fields
@@ -57,7 +57,7 @@ module Slices
       end
     end
 
-    def as_json options = nil
+    def as_json(options = nil)
       super.merge(attachments_as_json)
     end
 
@@ -79,10 +79,8 @@ module Slices
 
     def _attachment_asset_ids
       attachment_asset_ids = self.class.attachment_fields.collect do |attachments|
-        [send(attachments)].flatten.collect do |attachment|
-          attachment.asset_id
-        end.reject {|i| i.nil? }
-      end.flat_map {|i| i }
+        [send(attachments)].flatten.collect(&:asset_id).reject(&:nil?)
+      end.flat_map { |i| i }
     end
 
     def remove_asset(asset)

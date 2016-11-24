@@ -2,7 +2,7 @@ class ProjectPresenter < PagePresenter
   include EntryPresenter
 
   @columns = {
-    name: 'Name',
+    name: 'Name'
   }
   class << self
     attr_reader :columns

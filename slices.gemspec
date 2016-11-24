@@ -11,17 +11,17 @@ Gem::Specification.new do |s|
   s.description = 'A Rails CMS that can be embedded within your own site.'
   s.license     = 'MIT'
 
-  s.required_ruby_version     = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency 'devise'            , '~> 3.5'
-  s.add_dependency 'highline'          , '~> 1.6.0'
-  s.add_dependency 'mongoid'           , '> 4.0.0', '< 5.0.0'
-  s.add_dependency 'mongoid-observers' , '~> 0'
-  s.add_dependency 'mongoid-paperclip' , '~> 0'
-  s.add_dependency 'rails'             , '~> 4.2'
-  s.add_dependency 'redcarpet'         , '~> 3.3'
-  s.add_dependency 'RedCloth'          , '~> 4.2'
-  s.add_dependency 'stringex'          , '~> 2.5'
+  s.add_dependency 'devise', '~> 3.5'
+  s.add_dependency 'highline', '~> 1.6.0'
+  s.add_dependency 'mongoid', '> 4.0.0', '< 5.0.0'
+  s.add_dependency 'mongoid-observers', '~> 0'
+  s.add_dependency 'mongoid-paperclip', '~> 0'
+  s.add_dependency 'rails', '~> 4.2'
+  s.add_dependency 'redcarpet', '~> 3.3'
+  s.add_dependency 'RedCloth', '~> 4.2'
+  s.add_dependency 'stringex', '~> 2.5'
   s.add_dependency 'will_paginate_mongoid', '~> 2.0'
 
   src_files           = Dir['{app,lib}/**/*']

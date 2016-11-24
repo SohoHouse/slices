@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Viewing page_paths on an asset", type: :request, js: true do
-
   let :slide do
     { asset_id: asset.id }
   end
@@ -40,6 +39,4 @@ describe "Viewing page_paths on an asset", type: :request, js: true do
       expect(page).to have_no_css 'div.pages h3'
     end
   end
-
 end
-

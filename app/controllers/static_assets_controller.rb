@@ -18,12 +18,12 @@ class StaticAssetsController < SlicesController
         'jpg' => 'image/jpeg',
         'png' => 'image/png',
         'gif' => 'image/gif',
-        'svg' => 'image/svg+xml'
+        'svg' => 'image/svg+xml',
       }[params[:format]]
     else
       {
         'stylesheets' => 'text/css',
-        'javascripts' => 'application/javascript'
+        'javascripts' => 'application/javascript',
       }[params[:asset_type]]
     end
   end
@@ -41,9 +41,8 @@ class StaticAssetsController < SlicesController
     headers['Expires']       = (Time.now + 60 * 60 * 24).utc.httpdate
 
     options.merge!({
-      text: File.open(path).read,
-    })
+      text: File.open(path).read
+    },)
     render options
   end
 end
-

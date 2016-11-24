@@ -132,4 +132,3 @@ describe 'Page data and meta-data', type: :request, js: true do
     expect(page).to have_field 'meta-meta_description', with: updated_description
   end
 end
-

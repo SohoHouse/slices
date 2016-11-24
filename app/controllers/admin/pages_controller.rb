@@ -18,7 +18,7 @@ class Admin::PagesController < Admin::AdminController
   def create
     page_attrs = params[:page].merge(author: current_admin)
     @page = new_page_class.make(page_attrs)
-    @layouts = [['Default', 'default']]
+    @layouts = [%w(Default default)]
 
     respond_with(:admin, @page) do |format|
       format.html { redirect_to admin_page_path(@page) }
@@ -72,6 +72,7 @@ class Admin::PagesController < Admin::AdminController
   end
 
   private
+
     def new_page_class
       params[:type].nil? ? Page : Object.const_get(params[:type].camelize)
     end
@@ -93,4 +94,3 @@ class Admin::PagesController < Admin::AdminController
       Slices::AvailableSlices.all
     end
 end
-

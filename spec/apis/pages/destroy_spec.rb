@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "DELETE to pages#destroy" do
-
   include_context "signed in as admin"
 
   before do
@@ -12,6 +11,4 @@ describe "DELETE to pages#destroy" do
   it "responds with deleted (no content)" do
     expect(response.code).to eq '204'
   end
-
 end
-

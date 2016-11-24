@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Add/Edit/Delete slices on a page", type: :request, js: true do
-
   let :new_slice_id do
     '#slice-__new__0'
   end
@@ -31,7 +30,7 @@ describe "Add/Edit/Delete slices on a page", type: :request, js: true do
     end
 
     it "1 slice reloaded shouldn't duplicate itself" do
-      within new_slice_id  do
+      within new_slice_id do
         fill_in 'Title', with: 'New slice title'
       end
       click_on_save_changes
@@ -47,6 +46,5 @@ describe "Add/Edit/Delete slices on a page", type: :request, js: true do
 
       expect(page).to have_no_css(new_slice_id)
     end
-
   end
 end

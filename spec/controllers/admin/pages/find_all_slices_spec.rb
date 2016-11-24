@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Admin::PagesController, type: :controller do
-
   before do
     sign_in_as_admin
   end
@@ -23,7 +22,5 @@ describe Admin::PagesController, type: :controller do
       expect(Slices::AvailableSlices).to receive(:all)
       post :update, id: id, page: {}
     end
-
   end
 end
-

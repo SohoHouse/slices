@@ -23,7 +23,7 @@ module Admin::AdminHelper
   #
   # @!visibility private
   def admin_nav_link(controller, url = false, selected_url = false)
-    controller_name = controller.gsub(/ /, "_").downcase.pluralize
+    controller_name = controller.tr(' ', "_").downcase.pluralize
     url = "/admin/#{controller_name}" unless url
 
     css = nil

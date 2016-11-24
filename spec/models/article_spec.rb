@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Article, type: :model do
   describe "#as_json" do
-
     let :article do
       home, parent = StandardTree.build_minimal_with_slices
       set_page, articles = StandardTree.add_article_set(home)
@@ -27,6 +26,5 @@ describe Article, type: :model do
     it "has article attributes" do
       expect(json_article[:published_at]).to eq article.published_at
     end
-
   end
 end

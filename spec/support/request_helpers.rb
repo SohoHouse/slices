@@ -1,14 +1,14 @@
 module RequestHelpers
 
   def jqtrigger(element, action)
-    page.execute_script "$(\"#{element}\").#{action.to_s}();"
+    page.execute_script "$(\"#{element}\").#{action}();"
   end
 
   def asset_fixture_path(file)
     File.join(Rails.root, 'spec', 'fixtures', file)
   end
 
-  def asset_fixture(file='test.jpg')
+  def asset_fixture(file = 'test.jpg')
     File.new(asset_fixture_path(file), 'r')
   end
 
@@ -34,16 +34,16 @@ module RequestHelpers
     sign_in_as_admin(true)
   end
 
-  def auto_confirm_with value
+  def auto_confirm_with(value)
     page.execute_script <<-JS
       window.confirm = function() { return #{value} }
     JS
   end
 
-  def js_click_on selector, options = {}
+  def js_click_on(selector, options = {})
     event_options = {
       which: 1,
-      shiftKey: options[:shift_key] == true
+      shiftKey: options[:shift_key] == true,
     }.to_json.gsub(/"(.+?)":/, '\1:')
 
     page.execute_script <<-JS
@@ -60,7 +60,7 @@ module RequestHelpers
     page.evaluate_script 'window.confirmation'
   end
 
-  def js_keydown keycode
+  def js_keydown(keycode)
     page.execute_script <<-JS
       $(window).trigger($.Event('keydown', { which: #{keycode} }));
     JS

@@ -22,7 +22,7 @@ class SlicesController < ActionController::Base
     render_not_found!(exception)
   end
 
-  def render_not_found!(exception)
+  def render_not_found!(_exception)
     logger.warn "404: #{request.path} :: #{request.params.inspect}"
     render_page(Page.find_virtual('not_found'), 404)
   end
@@ -47,7 +47,7 @@ class SlicesController < ActionController::Base
         controller:   self,
         current_page: @page,
         params:       params,
-        slices:       ordered_slices
+        slices:       ordered_slices,
       )
       render text: '', layout: page_layout(@page), status: status
     end
@@ -71,4 +71,3 @@ class SlicesController < ActionController::Base
     end
   end
 end
-

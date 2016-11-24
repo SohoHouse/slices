@@ -44,14 +44,13 @@ class SetSlice < Slice
     read_attribute(:sort_direction) || DEFAULT_SORT_DIRECTION
   end
 
-
   private
 
-  def sorted entries
+  def sorted(entries)
     entries.send sort_direction, sort_field
   end
 
-  def selected_by_type entries
+  def selected_by_type(entries)
     entries.where _type: entry_type.to_s.classify
   end
 end

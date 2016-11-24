@@ -32,7 +32,7 @@ describe "When posting to a slice", type: :request do
 
   context "on page that has a slice that can handle it" do
     class DataHandlingSlice < Slice
-      def handle_post(params)
+      def handle_post(_params)
         true
       end
 
@@ -56,4 +56,3 @@ describe "When posting to a slice", type: :request do
     end
   end
 end
-

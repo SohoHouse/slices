@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "A site with snippets", type: :request do
-
   before do
     home, page = StandardTree.build_minimal
     page.update_attributes(layout: 'layout_two')
@@ -34,5 +33,4 @@ describe "A site with snippets", type: :request do
 
     expect(page).to have_css 'footer p', ''
   end
-
 end

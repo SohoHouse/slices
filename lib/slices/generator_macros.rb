@@ -18,7 +18,7 @@ module Slices
     # @param [Symbol] name
     # @param [Proc] block macro body
     #
-    def generator name, &block
+    def generator(name, &block)
       define_singleton_method name, &block
       generators << name
     end

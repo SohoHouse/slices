@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe Page, type: :model do
   describe ".find_by_path" do
-
     context "when pages exist" do
-
       before do
         @home, @parent = StandardTree.build_minimal
       end
@@ -39,7 +37,6 @@ describe Page, type: :model do
 end
 
 describe Page, ".home" do
-
   context "when pages exist" do
     before do
       @home, @parent = StandardTree.build_minimal

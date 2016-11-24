@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Slices::HasAttachments do
-
-  class TestSlide < Attachment; end;
+  class TestSlide < Attachment; end
 
   let :asset do
     double id: 1,
@@ -21,7 +20,6 @@ describe Slices::HasAttachments do
 
   context "#attachments" do
     context "with custom name and class" do
-
       class CustomSlice
         include Mongoid::Document
         include Slices::HasAttachments
@@ -30,7 +28,7 @@ describe Slices::HasAttachments do
 
       subject do
         CustomSlice.new(
-          slides: [{asset_id: asset.id}]
+          slides: [{ asset_id: asset.id }],
         )
       end
 
@@ -42,7 +40,7 @@ describe Slices::HasAttachments do
     context "with defaults" do
       subject do
         DefaultSliceClass.new(
-          attachments: [{asset_id: asset.id}]
+          attachments: [{ asset_id: asset.id }],
         )
       end
 
@@ -53,16 +51,14 @@ describe Slices::HasAttachments do
   end
 
   describe "#as_json" do
-
     class SuperClass
       include Mongoid::Document
 
-      def as_json *args
+      def as_json(*args)
         super.merge("super" => true)
       end
 
       include Slices::HasAttachments
-
     end
 
     class SubClass < SuperClass
@@ -94,7 +90,6 @@ describe Slices::HasAttachments do
       it "calls as_json on attachments" do
         expect(subject[:attachments].first).to eq(attachment.as_json)
       end
-
     end
 
     context "with no attachments" do
@@ -105,13 +100,10 @@ describe Slices::HasAttachments do
       it "returns an empty array" do
         expect(subject[:attachments]).to be_an Array
       end
-
     end
-
   end
 
   describe "#attachment_asset_ids" do
-
     let :asset_id do
       BSON::ObjectId.new
     end
@@ -129,7 +121,6 @@ describe Slices::HasAttachments do
     end
 
     context "on a slide" do
-
       context "with two attachments" do
         subject do
           allow(slice).to receive(:attachments).and_return([attachment, other_attachment])
@@ -139,7 +130,6 @@ describe Slices::HasAttachments do
         it "is an array of asset_ids" do
           expect(subject).to eq [asset_id, other_asset_id]
         end
-
       end
 
       context "with an attachment missing an asset_id" do
@@ -155,7 +145,6 @@ describe Slices::HasAttachments do
         it "is an empty array" do
           expect(subject).to eq []
         end
-
       end
 
       context "with no attachments" do
@@ -166,12 +155,10 @@ describe Slices::HasAttachments do
         it "is an empty array" do
           expect(subject).to eq []
         end
-
       end
     end
 
     context "on a page with slices but no attachments" do
-
       let :asset_id do
         BSON::ObjectId.new
       end
@@ -199,11 +186,9 @@ describe Slices::HasAttachments do
       it "is an array of asset_ids" do
         expect(subject).to eq [asset_id]
       end
-
     end
 
     context "on a page with attachments and slices" do
-
       let :slice_asset_id do
         BSON::ObjectId.new
       end
@@ -248,7 +233,6 @@ describe Slices::HasAttachments do
         it "is an array of asset_ids" do
           expect(subject).to eq [page_asset_id, slice_asset_id]
         end
-
       end
 
       context "with the same assets on page and slice" do
@@ -271,7 +255,6 @@ describe Slices::HasAttachments do
         it "is an array of asset_ids" do
           expect(subject).to eq [page_asset_id, slice_asset_id]
         end
-
       end
 
       context "on a page with missing assets" do
@@ -292,11 +275,9 @@ describe Slices::HasAttachments do
         end
       end
     end
-
   end
 
   context "#slice_attachment_ids" do
-
     let :slice_asset_id do
       BSON::ObjectId.new
     end
@@ -340,7 +321,6 @@ describe Slices::HasAttachments do
       it "is an array of asset_ids" do
         expect(subject).to eq [slice_asset_id]
       end
-
     end
 
     context "on a page with an attachment slice" do
@@ -358,11 +338,9 @@ describe Slices::HasAttachments do
       it "is an array of asset_ids" do
         expect(subject).to eq [slice_asset_id]
       end
-
     end
 
     context "with the same assets on two different slices" do
-
       let :other_slice do
         DefaultSliceClass.new
       end
@@ -386,7 +364,6 @@ describe Slices::HasAttachments do
       it "is an array of asset_ids" do
         expect(subject).to eq [slice_asset_id]
       end
-
     end
 
     context "on a page with no slices" do
@@ -401,10 +378,6 @@ describe Slices::HasAttachments do
       it "is an empty array" do
         expect(subject).to eq []
       end
-
     end
-
   end
-
 end
-

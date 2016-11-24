@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Page, type: :model do
   describe "roles" do
-
     context "When creating virtual pages" do
       before do
         StandardTree.build_minimal
@@ -20,7 +19,6 @@ describe Page, type: :model do
     end
 
     context "When finding virtual pages" do
-
       it "is able to return virtual page role for HTTP status code" do
         expect(Page.role_for_status('500')).to eq 'error'
         expect(Page.role_for_status('404')).to eq 'not_found'
@@ -36,6 +34,5 @@ describe Page, type: :model do
         expect(virtual_pages).to include error
       end
     end
-
   end
 end

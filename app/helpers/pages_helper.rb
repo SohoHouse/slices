@@ -18,7 +18,7 @@ module PagesHelper
   # @param [String]   container     Name of container
   # @return [String]                Contents of rendered slices in container
   #
-  def container(container, options = {})
+  def container(container, _options = {})
     if @slice_renderer.present?
       @slice_renderer.render_container(container)
     end
@@ -58,7 +58,7 @@ module PagesHelper
       links = []
       links << link_to("Edit #{@page.class.to_s.underscore.humanize} in CMS", admin_page_path(@page, locale: I18n.locale), target: '_blank')
       links << link_to('Edit template in CMS', admin_page_path(@page.parent, entries: 1, locale: I18n.locale), target: '_blank') if @page.entry?
-      content = links.collect {|l| content_tag(:p, l) }.join.html_safe
+      content = links.collect { |l| content_tag(:p, l) }.join.html_safe
 
       content_tag(:div, content, id: 'edit_in_cms')
     end
@@ -113,7 +113,6 @@ _gaq.push(#{analytics_que});
   # @return [Boolean]
   #
   def add_tracking_code?
-    Rails.env.production? && ! admin_signed_in?
+    Rails.env.production? && !admin_signed_in?
   end
 end
-

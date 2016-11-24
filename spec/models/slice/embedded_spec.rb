@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Slice, :type => :model do
-
   context "is embeded in a page" do
     let :page do
       Page.new(name: 'Page').tap do |page|
@@ -37,6 +36,4 @@ describe Slice, :type => :model do
       expect(slice.normal_or_set_page).to eq page
     end
   end
-
 end
-

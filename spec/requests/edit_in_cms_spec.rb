@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "'Edit in CMS' button", type: :request do
-
   before do
     StandardTree.build_minimal
   end
@@ -28,5 +27,4 @@ describe "'Edit in CMS' button", type: :request do
       expect(page).to have_link 'Edit Page in CMS', href: "/admin/pages/#{Page.home.id}?locale=#{I18n.locale}"
     end
   end
-
 end

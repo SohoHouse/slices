@@ -32,5 +32,4 @@ describe "A container with options", type: :request, js: true do
 
     expect(page).to have_no_css '.container-select'
   end
-
 end

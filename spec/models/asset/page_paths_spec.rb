@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Asset, type: :model do
-
   let :asset do
     Asset.new
   end
@@ -21,11 +20,10 @@ describe Asset, type: :model do
 
       it "sets page_cache" do
         expect(asset.page_cache).to eq [
-          {id: 1, name: '1', path:'/path'},
-          {id: 2, name: 'b', path:'/other-path'}
+          { id: 1, name: '1', path: '/path' },
+          { id: 2, name: 'b', path: '/other-path' },
         ]
       end
-
     end
 
     context "when the asset is not associated with pages" do
@@ -37,9 +35,6 @@ describe Asset, type: :model do
       it "sets page_cache to an empty array" do
         expect(asset.page_cache).to eq []
       end
-
     end
   end
-
 end
-

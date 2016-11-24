@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "The page layout selector", type: :request, js: true do
-
   before do
     home, my_page = StandardTree.build_minimal_with_slices
     my_page.update_attributes(layout: 'layout_one')
@@ -18,7 +17,7 @@ describe "The page layout selector", type: :request, js: true do
       'Layout Two',
       'Layout With Container Options',
       'Layout Yield',
-      'One Container'
+      'One Container',
     ], selected: 'Layout One'
   end
 
@@ -27,6 +26,4 @@ describe "The page layout selector", type: :request, js: true do
     click_on_save_changes
     expect(page).to have_select 'meta-layout', selected: 'Layout Two'
   end
-
 end
-

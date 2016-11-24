@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Page, type: :model do
   describe ".make" do
-
     context "when no pages exist" do
       it "returns a page" do
         expect(Page.make(name: 'Home', permalink: '')).to be_a Page
@@ -48,6 +47,5 @@ describe Page, type: :model do
         expect(entry.layout).to eq layout
       end
     end
-
   end
 end

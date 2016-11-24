@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "GET to pages#show.hbs" do
-
   include_context "signed in as admin"
 
   before do
@@ -23,4 +22,3 @@ describe "GET to pages#show.hbs" do
     expect(response.body).to include '<p>hello</p>'
   end
 end
-

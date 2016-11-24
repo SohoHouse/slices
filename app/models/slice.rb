@@ -19,7 +19,7 @@ class Slice
   end
 
   def self.restricted?
-    self.restricted == true
+    restricted == true
   end
 
   def setup(options)
@@ -41,7 +41,7 @@ class Slice
   end
 
   def template_path
-    template = (type =~ /_(set|show)$/) ? $1 : 'show'
+    template = (type =~ /_(set|show)$/) ? Regexp.last_match(1) : 'show'
     File.join type.sub(/_show$/, '_set'), 'views', template
   end
 
@@ -84,7 +84,7 @@ class Slice
 
   def write_attributes(attrs)
     attrs = attrs.symbolize_keys
-    self.embedded_relations.each do |field, metadata|
+    embedded_relations.each do |field, metadata|
       field = field.to_sym
       next unless attrs.has_key?(field)
 
@@ -102,12 +102,12 @@ class Slice
     super
   end
 
-  def as_json(*args)
+  def as_json(*_args)
     attributes.symbolize_keys.except(:_id, :_type).tap do |result|
       result.merge!(id: id.to_s, type: type)
       result.merge!(client_id: client_id) if client_id? && new_record?
 
-      self.embedded_relations.each do |field, metadata|
+      embedded_relations.each do |field, _metadata|
         result.merge!(field.to_sym => send(field).map(&:as_json))
       end
 

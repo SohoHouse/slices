@@ -56,5 +56,5 @@ end
 
 Mime::Type.register_alias 'text/plain', :hbs
 Time::DATE_FORMATS.merge!(
-  day_month_year: '%d %B %Y'
+  day_month_year: '%d %B %Y',
 )

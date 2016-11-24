@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "Password reset for /admin", type: :request, js: true do
-
   it "Reset admin users password" do
     Devise::Mailer.default_url_options[:host] = "example.com"
     Admin.create!(email: 'hello@withassociates.com', password: '123456')
@@ -26,6 +25,4 @@ describe "Password reset for /admin", type: :request, js: true do
 
     expect(page.current_path).to eq('/admin/site_maps')
   end
-
 end
-

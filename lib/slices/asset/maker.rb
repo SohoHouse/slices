@@ -1,7 +1,6 @@
 module Slices
   module Asset
     class Maker
-
       attr_accessor :args, :new_asset
 
       def self.run(args)
@@ -29,7 +28,7 @@ module Slices
 
       def s3_path
         s3_path = args[:file].path
-        s3_path[s3_path.index(Slices::Config::S3_TEMPFILE_KEY_PREFIX) .. -1]
+        s3_path[s3_path.index(Slices::Config::S3_TEMPFILE_KEY_PREFIX)..-1]
       end
 
       def delete_tempfile_from_s3

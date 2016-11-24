@@ -10,11 +10,10 @@ shared_examples "it has been reparented" do |name, from, to|
 end
 
 describe SiteMap, type: :model do
-
   def site_map_tree_beneath(page)
     tree = { 'id' => page.id.to_s }
     reloaded_children = Page.find_by_path(page.path).page_children
-    if ! reloaded_children.empty?
+    if !reloaded_children.empty?
       tree['children'] = reloaded_children.map { |c| site_map_tree_beneath(c) }
     end
     tree
@@ -120,4 +119,3 @@ describe SiteMap, type: :model do
     end
   end
 end
-

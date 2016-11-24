@@ -2,11 +2,10 @@ require 'spec_helper'
 
 describe Layout, type: :model do
   describe "#all" do
-
     subject { Layout.all }
 
     it 'finds layouts in app/view/layouts' do
-      expect(subject).to include(['Default', 'default'])
+      expect(subject).to include(%w(Default default))
     end
 
     it 'finds layouts in test/fixtures/view/layouts' do
@@ -14,8 +13,7 @@ describe Layout, type: :model do
     end
 
     it 'ignores admin layout' do
-      expect(subject).not_to include(['Admin', 'admin'])
+      expect(subject).not_to include(%w(Admin admin))
     end
-
   end
 end

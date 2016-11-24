@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Asset, type: :model do
-
   context "searching on :name" do
     before do
       Asset.make(name: 'Otters and DolPHINS', file: file_fixture)
@@ -32,7 +31,7 @@ describe Asset, type: :model do
     end
 
     let :page_cache do
-      [{'id' => 1, 'name' => 'creatures', 'path' => '/animals'}]
+      [{ 'id' => 1, 'name' => 'creatures', 'path' => '/animals' }]
     end
 
     before do
@@ -59,4 +58,3 @@ describe Asset, type: :model do
     end
   end
 end
-

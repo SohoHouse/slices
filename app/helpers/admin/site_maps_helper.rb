@@ -8,7 +8,7 @@ module Admin::SiteMapsHelper
   # @!visibility private
   def list_pages(pages)
     pages.inject(''.html_safe) do |html, page|
-      html << render(partial: page_partial(page), locals: {page: page} )
+      html << render(partial: page_partial(page), locals: { page: page })
     end
   end
 

@@ -1,15 +1,14 @@
 class StandardTree
-
   def self.build_virtual
     not_found = Page.make(
       role:    'not_found',
       name:    'Page not found',
-      active:  true
+      active:  true,
     )
     error = Page.make(
       role:    'error',
       name:    'Something went wrong',
-      active:  true
+      active:  true,
     )
     [not_found, error]
   end
@@ -19,7 +18,7 @@ class StandardTree
       name:        'Home',
       permalink:   '',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
   end
 
@@ -30,7 +29,7 @@ class StandardTree
       name:        'Parent',
       permalink:   'parent',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     [home, parent]
   end
@@ -41,12 +40,12 @@ class StandardTree
     parent.slices.build({
       title:     'Title',
       container: 'container_one',
-      position:  0
+      position:  0,
     }, TitleSlice)
     parent.slices.build({
       textile:   'h2. Textile',
       container: 'container_two',
-      position:  0
+      position:  0,
     }, TextileSlice)
 
     parent.save!
@@ -60,42 +59,42 @@ class StandardTree
       name:        'Child',
       permalink:   'child',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     grand_child = Page.make(
       parent:      child,
       name:        'Grand child',
       permalink:   'grand-child',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     Page.make(
       parent:      parent,
       name:        'Sibling',
       permalink:   'sibling',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     Page.make(
       parent:      parent,
       name:        'Youngest',
       permalink:   'youngest',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     Page.make(
       parent:      home,
       name:        'Aunt',
       permalink:   'aunt',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     Page.make(
       parent:      home,
       name:        'Uncle',
       permalink:   'uncle',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     [child, grand_child]
   end
@@ -112,14 +111,14 @@ class StandardTree
       name:        'Cousin',
       permalink:   'cousin',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
     Page.make(
       parent:      cousin,
       name:        'Once Removed',
       permalink:   'once-removed',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     )
   end
 
@@ -143,33 +142,33 @@ class StandardTree
   # /parent/articles
   # /parent/articles/article-1
   # /parent/articles/article-2
-  def self.add_article_set(parent, options={})
+  def self.add_article_set(parent, options = {})
     set_page = SetPage.make({
       parent:      parent,
       name:        'Articles',
       permalink:   'articles',
       active:      true,
-      show_in_nav: true
+      show_in_nav: true,
     }.merge(options))
 
     set_page.slices << ArticleSetSlice.new(
-      container: 'container_one'
+      container: 'container_one',
     )
     set_page.set_slices << TextileSlice.new(
       textile:   'I appear above every article.',
-      container: 'container_one'
+      container: 'container_one',
     )
     set_page.set_slices << PlaceholderSlice.new(
-      container: 'container_one'
+      container: 'container_one',
     )
     set_page.set_slices << TextileSlice.new(
       textile:   'I appear below every article.',
-      container: 'container_one'
+      container: 'container_one',
     )
 
     set_page.save!
 
-    articles = (1..2).collect { self.add_article(set_page) }
+    articles = (1..2).collect { add_article(set_page) }
     [set_page, articles]
   end
 
@@ -180,14 +179,13 @@ class StandardTree
       name:       "Article #{i}",
       permalink:  "article-#{i}",
       published_at: i.weeks.ago,
-      active:     true
+      active:     true,
     ).tap do |page|
       page.slices << TitleSlice.new(
         title:     "Article #{i}",
-        container: 'container_one'
+        container: 'container_one',
       )
       page.save!
     end
   end
-
 end

@@ -93,6 +93,7 @@ module Slices
     end
 
     private
+
     def self.admin_asset_styles
       { admin: '180x180#' }
     end
@@ -101,14 +102,13 @@ module Slices
     # This removes colour profiles, sets the dpi to 72 dpi (the image is not
     # resampled). The colour depth is set to 8 bits per pixel
     def self.asset_convert_options
-      Hash.new.tap do |options|
+      {}.tap do |options|
         asset_styles.keys.each do |style|
           next if style == :original
           options[style] = "-strip -density 72x72 -depth 8"
         end
       end
     end
-
   end
 
 end

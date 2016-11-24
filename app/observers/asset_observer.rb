@@ -3,4 +3,3 @@ class AssetObserver < Mongoid::Observer
     record.update_page_cache
   end
 end
-

@@ -7,7 +7,7 @@ describe "static asset routing", type: :routing do
       action:     'templates',
       slice:      'article_set',
       name:       'article_meta',
-      format:     'hbs'
+      format:     'hbs',
     )
   end
 end

@@ -11,7 +11,7 @@ describe "The token field", type: :request, js: true do
       name:       'Set Page',
       layout:     'default',
       slices:     [ArticleSetSlice.new(container:  'container_one')],
-      set_slices: [PlaceholderSlice.new(container: 'container_one')]
+      set_slices: [PlaceholderSlice.new(container: 'container_one')],
     )
   end
 
@@ -51,5 +51,4 @@ describe "The token field", type: :request, js: true do
     expect(page).to have_css('.token', text: 'Will')
     expect(entry.reload.tag).to eq('Will')
   end
-
 end

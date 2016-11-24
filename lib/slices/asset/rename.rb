@@ -10,7 +10,7 @@ module Slices
         klass.new(file, new_file_name).run
       rescue NameError
         raise UnsupportedStorage,
-        "Renaming files with '#{file.options[:storage]}' is not supported"
+          "Renaming files with '#{file.options[:storage]}' is not supported"
       end
 
       class Base
@@ -43,7 +43,7 @@ module Slices
 
       class Fog < Base
         def new_path
-          @new_path[1 .. -1]
+          @new_path[1..-1]
         end
 
         def rename(style)
@@ -52,7 +52,7 @@ module Slices
           file.copy(
             directory.key,
             @new_path,
-            {'x-amz-acl' => 'public-read'}
+            { 'x-amz-acl' => 'public-read' },
           )
           file.destroy
         end

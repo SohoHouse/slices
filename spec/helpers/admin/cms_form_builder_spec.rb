@@ -1,7 +1,6 @@
 require "spec_helper"
 
 describe "Slices::CmsFormBuilder", type: :helper do
-
   def snowman
     txt = %{<input name="utf8" type="hidden" value="&#x2713;" />}
   end
@@ -55,6 +54,5 @@ describe "Slices::CmsFormBuilder", type: :helper do
 
       assert_dom_equal expected, form
     end
-
   end
 end

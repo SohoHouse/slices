@@ -2,7 +2,6 @@
 require 'spec_helper'
 
 describe "Page dispatching with navigation", type: :request do
-
   def assert_primary_nav_link(text, href, html_class)
     expect(page).to have_css 'ul#primary_navigation' do
       assert_nav_link(text, href, html_class)

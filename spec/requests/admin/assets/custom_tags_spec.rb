@@ -16,4 +16,3 @@ describe "Adding tags to an asset", type: :request, js: true do
     expect(asset.reload.tags).to eq('super cool')
   end
 end
-

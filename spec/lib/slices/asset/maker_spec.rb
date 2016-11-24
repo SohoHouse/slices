@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'Slices::Asset::Maker' do
-
   before do
     allow(Slices::Config).to receive_messages(s3_storage?: false)
   end
@@ -29,7 +28,7 @@ describe 'Slices::Asset::Maker' do
       allow(maker).to receive_messages(new_asset: new_asset)
       matching_asset = double(:matching_asset).as_null_object
 
-      expect(Asset).to receive(:where).and_return(double(first:matching_asset))
+      expect(Asset).to receive(:where).and_return(double(first: matching_asset))
       expect(maker.find_matching_asset(new_asset)).to eq matching_asset
     end
   end
@@ -67,7 +66,7 @@ describe 'Slices::Asset::Maker' do
     context "when a matching asset is found" do
       let :matching_asset do
         double(:matching_asset,
-             present?: true
+          present?: true,
             ).as_null_object
       end
 
@@ -84,6 +83,5 @@ describe 'Slices::Asset::Maker' do
         maker.run
       end
     end
-
   end
 end

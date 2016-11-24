@@ -47,5 +47,4 @@ describe "A simple site", type: :request do
     expect(page.status_code).to eq 404
     expect(page).to have_title /not found/i
   end
-
 end

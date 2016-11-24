@@ -44,7 +44,6 @@ describe "Page dispatching when things go wrong", type: :request do
   end
 
   context "with no error handeling" do
-
     it "raises a NoMethodError when BrokenSlice fails to render" do
       expect {
         visit page_with_broken_slice.path
@@ -56,7 +55,5 @@ describe "Page dispatching when things go wrong", type: :request do
         visit page_with_broken_layout.path
       }.to raise_error NoMethodError
     end
-
   end
 end
-

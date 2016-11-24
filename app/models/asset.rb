@@ -7,7 +7,6 @@ class Asset
   IMAGE_REGEX = /(jpg|jpeg|gif|png)/
   NORMALIZED_EXTENSIONS = { ".jpeg" => ".jpg" }
 
-
   field :file_content_type, type: String
   field :file_file_name, type: String
   field :file_file_size, type: Integer
@@ -58,7 +57,7 @@ class Asset
     desc(:created_at)
   end
 
-  def as_json(options = nil)
+  def as_json(_options = nil)
     {
       id:                id.to_s,
       name:              name,
@@ -70,7 +69,7 @@ class Asset
       errors:            errors,
       created_at:        created_at,
       tags:              tags,
-      pages:             page_cache.each { |pc| pc[:id] = pc[:id].to_s }
+      pages:             page_cache.each { |pc| pc[:id] = pc[:id].to_s },
     }
   end
 
@@ -96,7 +95,7 @@ class Asset
   end
 
   def reprocess_for(style)
-    if file.styles.has_key?(style) && ! file_dimensions.has_key?(style.to_s)
+    if file.styles.has_key?(style) && !file_dimensions.has_key?(style.to_s)
       file.reprocess!(style)
     end
   rescue Errors::NotIdentifiedByImageMagickError, Errno::ENOENT
@@ -112,7 +111,7 @@ class Asset
   def store_dimensions
     file.queued_for_write.each do |style, adapter|
       geometry = Paperclip::Geometry.from_file(adapter)
-      self.file_dimensions[style.to_s] = geometry.to_s
+      file_dimensions[style.to_s] = geometry.to_s
     end
   end
 
@@ -167,35 +166,79 @@ class Asset
   # this is used when a new version of an asset is uploaded
   #
   def reset_file_dimensions!
-    self.file_dimensions.keys.each do |key|
+    file_dimensions.keys.each do |key|
       next if key == 'original' || key == 'admin'
-      self.file_dimensions.delete key
+      file_dimensions.delete key
     end
   end
 
   private
 
   def rename_file
-    return if @renamed
+    new_file_name = FilenameSanitizer.from(file, name)
 
-    new_file_name = sanitize(name)
     Slices::Asset::Rename.run(file, new_file_name)
     file.instance_write(:file_name, new_file_name)
+    @new_name = nil
     set_keywords
-    @renamed = true
   end
 
-  def sanitize(filename)
-    file.send(:cleanup_filename, filename).tap do |name|
-      name.slice!(100..-1)
-      name << SecureRandom.hex(2)
-      name << normalized_extension if file && file.original_filename
+  class FilenameSanitizer
+    QUITE_LONG_FILENAME_LENGTH = 100
+    INVALID_FILENAME_CHARACTERS = /[&$+,\/:;=?@<>\[\]\{\}\|\\\^~%# ]/
+    EXTENSION_REGEX = /\.#{IMAGE_REGEX}$/
+
+    attr_reader :file, :name
+
+    def self.from(file, name)
+      new(file, name).new_name
+    end
+
+    def initialize(file, name)
+      @name = name
+      @file = file
+    end
+
+    def new_name
+      new_name = sanitized_name
+
+      new_name = trim_name(new_name)
+
+      new_name << normalized_extension if file && file.original_filename
+
+      new_name
+    end
+
+    private
+
+    def acceptable_length
+      QUITE_LONG_FILENAME_LENGTH - uuid.length - normalized_extension.length
+    end
+
+    def sanitized_name
+      without_extension = name.gsub EXTENSION_REGEX, ""
+      Paperclip::FilenameCleaner.new(INVALID_FILENAME_CHARACTERS).call(without_extension)
+    end
+
+    def trim_name(new_name)
+      if new_name.length > QUITE_LONG_FILENAME_LENGTH
+        new_name = new_name.slice(-acceptable_length..-1)
+        new_name = new_name + uuid
+      end
+
+      new_name
+    end
+
+    def uuid
+      @uuid ||= SecureRandom.uuid
+    end
+
+    def normalized_extension
+      NORMALIZED_EXTENSIONS.fetch(extname, extname)
+    end
+
+    def extname
+      File.extname(file.original_filename).downcase
     end
   end
-
-  def normalized_extension
-    extname = File.extname(file.original_filename).downcase
-    NORMALIZED_EXTENSIONS.fetch(extname, extname)
-  end
-
 end

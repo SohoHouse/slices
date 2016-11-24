@@ -2,9 +2,9 @@ class SliceGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
   argument :attributes,
-           type: :array,
-           default: [],
-           banner: "field:type field:type"
+    type: :array,
+    default: [],
+    banner: "field:type field:type"
 
   class_option :with_entry_templates, type: :boolean, default: false,
                desc: "Add templates for editing entry content."
@@ -14,7 +14,7 @@ class SliceGenerator < Rails::Generators::NamedBase
 
   FIELD_NORMALIZATIONS = {
     text: :string,
-    datetime: :date_time
+    datetime: :date_time,
   }
 
   def create_slices
@@ -55,7 +55,6 @@ class SliceGenerator < Rails::Generators::NamedBase
     end
   end
 
-
   private
 
   def slice_path
@@ -92,7 +91,7 @@ class SliceGenerator < Rails::Generators::NamedBase
           "    field :caption",
           "  end",
           "  has_attachments :#{attribute.name}, class_name: '#{class_name}Slice::#{attachment_klass}'",
-          ""
+          "",
         ].join("\n")
       else
         out << "  field :#{attribute.name}, type: #{class_for_field attribute.type}"
@@ -102,22 +101,21 @@ class SliceGenerator < Rails::Generators::NamedBase
     out.join "\n"
   end
 
-  def slice_input_id name
+  def slice_input_id(name)
     "slices-{{id}}-#{name}"
   end
 
-  def needs_label? attribute
+  def needs_label?(attribute)
     attribute.name.underscore == class_name.underscore
   end
 
-  def label_if_needed_for attribute
+  def label_if_needed_for(attribute)
     unless attribute.name == file_name
       %{<label for="slices-{{id}}-#{attribute.name}">#{attribute.name.humanize}</label>}
     end
   end
 
-  def class_for_field type
+  def class_for_field(type)
     FIELD_NORMALIZATIONS.fetch(type, type).to_s.classify
   end
-
 end

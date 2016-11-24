@@ -1,9 +1,8 @@
 class PagesController < SlicesController
-
   def virtual_error_pages
     role = Page.role_for_status(params[:status])
     if role
-      render_page(Page.find_virtual(role), 200)  # page is only cached if status is 200
+      render_page(Page.find_virtual(role), 200) # page is only cached if status is 200
     else
       raise Page::NotFound.new(request.path)
     end
@@ -31,13 +30,14 @@ class PagesController < SlicesController
   end
 
   private
+
     def post_slice(page)
       page.slices.detect { |s| s.respond_to?(:handle_post) }.tap do |slice|
         slice.nil? && (raise RuntimeError.new("page can't handle POST data"))
         slice.setup({
           renderer: self,
-          current_page: page
-        })
+          current_page: page,
+        },)
       end
     end
 end

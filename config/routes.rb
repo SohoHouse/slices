@@ -5,7 +5,6 @@ class PageConstraints
 end
 
 Rails.application.routes.draw do
-
   devise_for :admin, path: 'admin', controllers: {
     passwords:  'admin/auth/passwords',
     sessions:   'admin/auth/sessions',
@@ -29,7 +28,7 @@ Rails.application.routes.draw do
   get ':action/:asset_type(/:folder)/*name.:format' => 'static_assets',
     :constraints => {
     :asset_type => /(stylesheets|javascripts|images)/,
-    :action => /(slices|sites)/
+    :action => /(slices|sites)/,
   }, :as => :static_assets
 
   get ':status.html' => 'pages#virtual_error_pages'

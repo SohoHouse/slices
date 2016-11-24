@@ -34,4 +34,3 @@ describe Slices::InstallGenerator do
     expect(file("app/views/admin/shared/_custom_links.html.erb")).to exist
   end
 end
-

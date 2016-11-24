@@ -1,7 +1,7 @@
 class PreparedSlice < Slice
   attr_reader :prepared
 
-  def prepare(params)
+  def prepare(_params)
     @prepared = true
   end
 end

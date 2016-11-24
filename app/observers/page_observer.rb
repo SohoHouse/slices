@@ -34,4 +34,3 @@ class PageObserver < Mongoid::Observer
     record.path_changed?
   end
 end
-

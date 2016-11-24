@@ -13,7 +13,6 @@ describe Asset, type: :model do
     end
 
     context "on creating an image asset" do
-
       it "stores the file type" do
         expect(asset.file_content_type).to eq 'image/jpeg'
       end
@@ -37,15 +36,12 @@ describe Asset, type: :model do
       it "stores the admin dimensions" do
         expect(asset.file_dimensions).to include 'admin' => '180x180'
       end
-
     end
 
     context "on creating a pdf asset" do
-
       it "is valid" do
         expect(pdf_asset).to be_valid
       end
-
     end
 
     context "#admin_image_url" do
@@ -78,9 +74,8 @@ describe Asset, type: :model do
     end
 
     context "#dimensions_for" do
-
       let :asset_with_dimensions do
-        Asset.new(file_dimensions: { 'extended' => '1x1' } )
+        Asset.new(file_dimensions: { 'extended' => '1x1' })
       end
 
       it "returns the dimensions of the asset" do
@@ -95,7 +90,6 @@ describe Asset, type: :model do
     end
 
     context "#reprocess_for!" do
-
       it "deletes the existing style" do
         asset.url_for(:extended)
         expect(asset.file).to receive(:flush_deletes).at_least(:once)
@@ -111,11 +105,9 @@ describe Asset, type: :model do
 
         expect(asset.file_dimensions).not_to include 'extended'
       end
-
     end
 
     context "#reprocess_for" do
-
       it "returns nil for missing images" do
         expect(asset.file).to receive(:reprocess!).and_raise(Errno::ENOENT)
         expect(asset.reprocess_for!(:extended)).to be_nil
@@ -143,33 +135,27 @@ describe Asset, type: :model do
 
           expect(asset.file.exists?(:extended)).to be_truthy
         end
-
       end
 
       context "with an already processed style" do
-
         it "does not processes the style" do
-          asset = Asset.new(file_dimensions: { 'extended' => '1x1'} )
+          asset = Asset.new(file_dimensions: { 'extended' => '1x1' })
           expect(asset.file).not_to receive(:reprocess!)
           asset.reprocess_for(:extended)
         end
-
       end
 
       context "with an existing file" do
-
         it "processes the style" do
-          asset = Asset.new(file_dimensions: {} )
+          asset = Asset.new(file_dimensions: {})
           allow(asset.file).to receive_messages(exists?: true)
           expect(asset.file).to receive(:reprocess!)
           asset.reprocess_for(:extended)
         end
-
       end
     end
 
     context "#reset_file_dimensions!" do
-
       it "is called when an asset is replaced" do
         expect(asset).to receive(:reset_file_dimensions!)
         asset.update_attributes(file: file_fixture('invalid_colour_profile.jpg'))
@@ -187,12 +173,11 @@ describe Asset, type: :model do
         }
         dimensions = orginal_dimensions.merge({
           'extended' => '1x1'
-        })
+        },)
         asset = Asset.new(file_dimensions: dimensions)
         asset.reset_file_dimensions!
         expect(asset.file_dimensions).to eq orginal_dimensions
       end
     end
-
   end
 end

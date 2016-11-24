@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Slice, type: :model do
-
   context "has a template" do
-
     class TestSlice < Slice; end
     class TestSetSlice < SetSlice; end
     class TestShowSlice < Slice; end
@@ -24,6 +22,4 @@ describe Slice, type: :model do
       expect(slice).to be_to_delete
     end
   end
-
 end
-

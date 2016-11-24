@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Page, type: :model do
   describe "#update_attributes" do
-
     def update_page_attributes_with(page, options = {})
       options.reverse_merge!({
         'name'        => 'Updated parent',
@@ -12,7 +11,7 @@ describe Page, type: :model do
         'layout'      => 'layout_three',
         'meta_description' => 'This is an important page',
         'title'       => 'Title',
-      })
+      },)
       page.update_attributes(options)
     end
 

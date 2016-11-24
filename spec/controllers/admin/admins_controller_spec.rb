@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Admin::AdminsController, :type => :controller do
-
   before do
     sign_in_as_admin
   end
@@ -14,21 +13,20 @@ describe Admin::AdminsController, :type => :controller do
   end
 
   context "on PUT to :update" do
-
     let :admin_params do
       {
         name: 'Updated Name',
         email: 'updated@withassociates.com',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
       }
     end
 
     let :admin_params_with_password do
       admin_params.merge({
         password: 'sekret',
-        password_confirmation: 'sekret'
-      })
+        password_confirmation: 'sekret',
+      },)
     end
 
     let :admin_id do
@@ -67,7 +65,6 @@ describe Admin::AdminsController, :type => :controller do
         put :update, id: admin_id, admin: admin_params
         expect(response.code).to eq '302'
       end
-
     end
 
     context "with in valid attributes" do
@@ -79,9 +76,7 @@ describe Admin::AdminsController, :type => :controller do
         put :update, id: admin_id, admin: admin_params
         is_expected.to render_template :show
       end
-
     end
-
   end
 
   context "on DELETE to :destroy" do
@@ -97,4 +92,3 @@ describe Admin::AdminsController, :type => :controller do
     end
   end
 end
-

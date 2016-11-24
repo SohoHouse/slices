@@ -97,5 +97,4 @@ describe "The 'Save changes' button", type: :request, js: true do
       is_expected.not_to be_disabled
     end
   end
-
 end

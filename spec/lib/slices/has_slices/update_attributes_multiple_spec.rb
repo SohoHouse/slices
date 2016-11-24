@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slices::HasSlices do
   describe "#update_attributes with multiple slices" do
-
     def add_slice(page, type, container, position)
       slice_class = Object.const_get("#{type}Slice".camelize)
       slice = slice_class.new(type => 'content', container: container,
@@ -47,13 +46,13 @@ describe Slices::HasSlices do
       slice_attributes(position, {
         '_new' => '1',
         'client_id' => '__new__2',
-      })
+      },)
     end
 
     def existing_slice(position, options = {})
       slice_attributes(position, options.reverse_merge!({
-        "id" => slices[position - 1].id.to_s,
-      }))
+        "id" => slices[position - 1].id.to_s
+      },))
     end
 
     def slice_attributes(position, options = {})
@@ -61,8 +60,8 @@ describe Slices::HasSlices do
         "container" => "container_one",
         "position"  => position.to_s,
         "textile"   => position.to_s,
-        "type"      => "textile"
-      })
+        "type"      => "textile",
+      },)
     end
 
     def page_attributes(slices)
@@ -72,7 +71,7 @@ describe Slices::HasSlices do
         'permalink'         => "/",
         'position'          => "",
         'title'             => "",
-        "slices"            => slices
+        "slices"            => slices,
       }
     end
 
@@ -117,7 +116,6 @@ describe Slices::HasSlices do
       it "has no slice with the textile '1'" do
         has_no_slice_with_textile(home.slices, '1')
       end
-
     end
 
     context "and deleting one and adding two" do
@@ -147,7 +145,6 @@ describe Slices::HasSlices do
         has_slice_with_textile(home.slices, '6')
         has_slice_with_textile(home.slices, '7')
       end
-
     end
 
     context "and deleting all existing and adding two" do
@@ -180,7 +177,6 @@ describe Slices::HasSlices do
         has_slice_with_textile(home.slices, '6')
         has_slice_with_textile(home.slices, '7')
       end
-
     end
 
     context "and deleting one and adding one at top" do
@@ -204,7 +200,6 @@ describe Slices::HasSlices do
       it "has slices with 2 to 6" do
         (2..6).each { |num| has_slice_with_textile(home.slices, num.to_s) }
       end
-
     end
   end
 end

@@ -27,6 +27,4 @@ describe "Rendering a page with slices", type: :request do
     expect(page).to have_css '.container_one h2:nth-child(2)', text: 'Sub heading'
     expect(page).to have_css '.container_one h3:nth-child(3)', text: 'Sub-sub heading'
   end
-
 end
-

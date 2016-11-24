@@ -23,11 +23,11 @@ RSpec::Matchers.define :have_stopped_communicating do
     expect(actual).to have_no_css '#server-communication', visible: true
   end
 
-  failure_message do |actual|
+  failure_message do |_actual|
     "expected to have stopped communicating with the server"
   end
 
-  failure_message_when_negated do |actual|
+  failure_message_when_negated do |_actual|
     "expected to still be communicating with the server"
   end
 end

@@ -38,8 +38,8 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
     phantomjs_logger: WarningSuppressor,
     debug: false,
-    inspector: true
-  })
+    inspector: true,
+  },)
 end
 
 module Capybara::Node::Matchers
@@ -55,4 +55,3 @@ module Capybara::Node::Matchers
 end
 
 Capybara.javascript_driver = :poltergeist
-

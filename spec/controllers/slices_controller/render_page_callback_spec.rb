@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe PagesController, type: :controller do
   describe "#render_page" do
-
     before do
       StandardTree.build_minimal
       PagesController.set_callback :render_page, :before, :my_callback

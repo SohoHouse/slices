@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slices::HasSlices do
   describe "#ordered_slices" do
-
     let :page do
       SetPage.create!(name: 'content')
     end
@@ -11,7 +10,7 @@ describe Slices::HasSlices do
       {
         title: "t#{options[:position]}",
         container: "container_one",
-        position: options[:position]
+        position: options[:position],
       }
     end
 

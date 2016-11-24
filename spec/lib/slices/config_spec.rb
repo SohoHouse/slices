@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe Slices::Config do
-
   context "Configuring asset styles" do
     before do
       Slices::Config.add_asset_styles(
         extended: '705x456>',
-        admin: '90x90!'
+        admin: '90x90!',
       )
     end
 
@@ -39,5 +38,4 @@ describe Slices::Config do
       expect(convert_options.keys).to include :extended
     end
   end
-
 end

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Slice, type: :model do
   describe "with peers" do
-
     def add_slice(page, type, container, position)
       slice_class = Object.const_get("#{type}Slice".camelize)
       slice = slice_class.new(type => 'content', container: container, position: position)
@@ -83,7 +82,7 @@ describe Slice, type: :model do
       end
 
       it "know its position in adjacent of type" do
-        1000.times { |i|
+        1000.times { |_i|
           expect(first_by_position.position_in_adjacent_of_type).to eq 1
           expect(second_by_position.position_in_adjacent_of_type).to eq 2
           expect(third_by_position.position_in_adjacent_of_type).to eq 1

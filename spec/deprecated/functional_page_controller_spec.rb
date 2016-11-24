@@ -6,7 +6,6 @@ describe "Old function page controller tests", type: :api do
   include_context "signed in as admin"
 
   describe "on GET to :new" do
-
     before do
       home, @page = StandardTree.build_minimal
     end
@@ -23,7 +22,6 @@ describe "Old function page controller tests", type: :api do
   end
 
   context "on GET to :show" do
-
     context "for a existing page" do
       before do
         home, @page = StandardTree.build_minimal_with_slices
@@ -48,7 +46,6 @@ describe "Old function page controller tests", type: :api do
   end
 
   describe "POST to :create", type: :api do
-
     def page_params(parent)
       { parent_id: parent.id.to_s, name: 'A page', layout: 'layout1' }
     end
@@ -89,7 +86,6 @@ describe "Old function page controller tests", type: :api do
         expect(Page.last).to be_a Article
       end
     end
-
   end
 
   describe "on DELETE to :destroy as html" do
@@ -103,4 +99,3 @@ describe "Old function page controller tests", type: :api do
     end
   end
 end
-

@@ -11,7 +11,7 @@ class Admin::EntriesController < Admin::AdminController
         @columns = entry_presenter_class.columns
         @options = {
           sort_field: sort_field,
-          sort_direction: sort_direction
+          sort_direction: sort_direction,
         }
       end
       format.json do
@@ -20,14 +20,13 @@ class Admin::EntriesController < Admin::AdminController
     end
   end
 
-
   private
 
   def fetch_entries
     presented paginated searched sorted raw_entries
   end
 
-  def presented entries
+  def presented(entries)
     entries.dup.tap do |entries|
       entries.each_with_index do |entry, index|
         entries[index] = entry_presenter_class.new entry
@@ -35,7 +34,7 @@ class Admin::EntriesController < Admin::AdminController
     end
   end
 
-  def paginated entries
+  def paginated(entries)
     if sort_field != :position
       params[:per_page] = 50 unless params.include?(:per_page)
       params[:per_page] = params[:per_page].to_i
@@ -46,7 +45,7 @@ class Admin::EntriesController < Admin::AdminController
     end
   end
 
-  def searched entries
+  def searched(entries)
     if params[:search].present?
       entries.basic_text_search params[:search]
     else
@@ -54,7 +53,7 @@ class Admin::EntriesController < Admin::AdminController
     end
   end
 
-  def sorted entries
+  def sorted(entries)
     entries.send sort_direction, sort_field
   end
 
