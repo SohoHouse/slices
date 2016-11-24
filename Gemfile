@@ -5,6 +5,10 @@ gem 'fog-aws'
 gem 'ammeter'
 
 group :development, :test do
+
+  #https://github.com/mongoid/mongoid-observers#installation
+  gem 'rails-observers',  github: 'rails/rails-observers'
+
   gem 'bundler'
   gem 'pry-byebug'
   gem 'capybara', '~> 2.5'
@@ -12,6 +16,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'test-unit', platforms: [:ruby_22]
 end
+
 
 group :test do
   gem 'fuubar'

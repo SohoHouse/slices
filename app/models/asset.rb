@@ -6,7 +6,6 @@ class Asset
 
   IMAGE_REGEX = /(jpg|jpeg|gif|png)/
   NORMALIZED_EXTENSIONS = { ".jpeg" => ".jpg" }
-  EXTENSION_REGEX = /\.#{IMAGE_REGEX}$/
 
   field :file_content_type, type: String
   field :file_file_name, type: String
@@ -187,6 +186,7 @@ class Asset
   class FilenameSanitizer
     QUITE_LONG_FILENAME_LENGTH = 100
     INVALID_FILENAME_CHARACTERS = /[&$+,\/:;=?@<>\[\]\{\}\|\\\^~%# ]/
+    EXTENSION_REGEX = /\.#{IMAGE_REGEX}$/
 
     attr_reader :file, :name
 

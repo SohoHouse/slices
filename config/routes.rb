@@ -5,11 +5,6 @@ class PageConstraints
 end
 
 Rails.application.routes.draw do
-  devise_for :admin, path: 'admin', controllers: {
-    passwords:  'admin/auth/passwords',
-    sessions:   'admin/auth/sessions',
-  }
-
   namespace :admin do
     get 'site_maps' => 'site_maps#index', as: :root # Devise redirects here after sign in
     get 'site_maps' => 'site_maps#index'

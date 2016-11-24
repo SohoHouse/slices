@@ -13,12 +13,18 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency 'devise', '~> 3.5'
+  s.add_dependency 'devise', '~> 4.2'
   s.add_dependency 'highline', '~> 1.6.0'
-  s.add_dependency 'mongoid', '> 4.0.0', '< 5.0.0'
-  s.add_dependency 'mongoid-observers', '~> 0'
+  s.add_dependency 'mongoid', '> 6.0.0', '< 7.0.0'
+
+  s.add_dependency 'mongoid-observers', '~> 0.3.0'
+
+  # add this to your repo
+  #https://github.com/mongoid/mongoid-observers/commit/2833cebdf0175a5f43fae1dc44d602b27aa6beb3
+  # gem 'rails-observers',  github: 'rails/rails-observers'
+
   s.add_dependency 'mongoid-paperclip', '~> 0'
-  s.add_dependency 'rails', '~> 4.2'
+  s.add_dependency 'rails', '~> 5.0'
   s.add_dependency 'redcarpet', '~> 3.3'
   s.add_dependency 'RedCloth', '~> 4.2'
   s.add_dependency 'stringex', '~> 2.5'
