@@ -103,7 +103,7 @@ slices.model.Page = (
 
         try {
           slicesInContainers[slice.container].push(slice);
-        } catch() {
+        } catch(error) {
         }
       });
     }
