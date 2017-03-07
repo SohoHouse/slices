@@ -23,7 +23,6 @@ class Asset
     max_size:        50.megabytes,
     url:             '/system/:attachment/:mon_year/:id/:style/:filename',
     path:            ':rails_root/public:url',
-    only_process:    [:admin],
     styles:          Slices::Config.asset_styles,
     convert_options: Slices::Config.asset_convert_options
 
