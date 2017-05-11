@@ -6,7 +6,7 @@ describe Slice, type: :model do
       class Embeddable
         include Mongoid::Document
         embedded_in :test_slice
-        field :data
+        field :data, localize: true
       end
 
       class TestSlice < Slice
@@ -31,17 +31,21 @@ describe Slice, type: :model do
       end
 
       context "when the embeddable already exists" do
-        let(:embeddable) { Embeddable.new(data: "old") }
-        before { slice.embeddables = [embeddable] }
+        let(:embeddable) { Embeddable.new(data_translations: { 'en' => "old", 'de' => 'german old' }) }
+        before do
+          slice.embeddables = [embeddable]
+        end
+
         let :embedded_attrs do
           {
-            _id: embeddable.id,
-            data: "new",
+            '_id' => embeddable.id,
+            'data' => "new",
           }
         end
 
         it "updates the embeddable" do
           expect(subject.data).to eq("new")
+          I18n.with_locale(:de) { expect(subject.data).to eq('german old') }
         end
 
         context "when embeddable field is not present in attributes" do
