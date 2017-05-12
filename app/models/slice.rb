@@ -89,8 +89,9 @@ class Slice
       next unless attrs.has_key?(field)
 
       attrs[field] = (attrs[field] || []).map do |embedded_attrs|
-        if embedded_attrs['id'].present?
-          embedded_doc = send(field).find(embedded_attrs['id'])
+        id = embedded_attrs['id'] || embedded_attrs['_id']
+        if id.present?
+          embedded_doc = send(field).find(id)
           embedded_doc.write_attributes(embedded_attrs)
           embedded_doc
         else
