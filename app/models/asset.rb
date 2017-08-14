@@ -94,6 +94,8 @@ class Asset
   end
 
   def reprocess_for(style)
+    return unless is_image?
+
     if file.styles.has_key?(style) && !file_dimensions.has_key?(style.to_s)
       file.reprocess!(style)
     end

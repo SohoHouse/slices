@@ -153,6 +153,14 @@ describe Asset, type: :model do
           asset.reprocess_for(:extended)
         end
       end
+
+      context "with a non-image file" do
+        it "doesn't reprocess" do
+          asset = pdf_asset
+          expect(asset.file).to_not receive(:reprocess!)
+          asset.reprocess_for(:extended)
+        end
+      end
     end
 
     context "#reset_file_dimensions!" do
