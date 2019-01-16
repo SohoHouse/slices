@@ -187,7 +187,7 @@ class Asset
   class FilenameSanitizer
     QUITE_LONG_FILENAME_LENGTH = 100
     INVALID_FILENAME_CHARACTERS = /[&$+,\/:;=?@<>\[\]\{\}\|\\\^~%# ]/
-    EXTENSION_REGEX = /\.#{IMAGE_REGEX}$/
+    EXTENSION_REGEX = /\.(#{IMAGE_REGEX}|pdf)$/
 
     attr_reader :file, :name
 

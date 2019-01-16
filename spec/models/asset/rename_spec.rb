@@ -11,12 +11,24 @@ describe "Renaming an asset", type: :model do
       asset.save!
     end
 
-    it "ensures the extension is maintained" do
-      expect(asset.name).to eq("Cute_Ladybird.jpg")
-    end
+    context "correctly saves the filename and extension" do
+      context "for jpg" do
+        it "ensures the extension is maintained" do
+          expect(asset.name).to eq("Cute_Ladybird.jpg")
+        end
 
-    it "alters the file name accordingly" do
-      expect(asset.file_file_name).to eq("Cute_Ladybird.jpg")
+        it "alters the file name accordingly" do
+          expect(asset.file_file_name).to eq("Cute_Ladybird.jpg")
+        end
+      end
+
+      context "for pdf" do
+        it "ensures the extension is maintained" do
+          pdf = Asset.make file: file_fixture('test.pdf')
+          expect(pdf.name).to eq("test.pdf")
+        end
+      end
+
     end
 
     it "moves the file on storage" do
